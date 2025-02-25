@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="src/styles/index.css">
+    <script src="src/scripts/index.js" defer></script>
 </head>
 <body>
     <header>
@@ -26,29 +26,29 @@
     <main>
         <section class="slider">
             <button class="prev" onclick="prevSlide()">&#10094;</button>
-            <img src="imagem1.jpg" alt="Banner 1" id="slider-img">
+            <img src="src/assets/imagem1.jpg" alt="Banner 1" id="slider-img">
             <button class="next" onclick="nextSlide()">&#10095;</button>
         </section>
         <section class="favorites">
             <h2>Tênis Favoritos</h2>
             <div class="favorite-logos">
                 <div class="favorite-card">
-                    <img src="tenis1.jpg" alt="Tênis Nike">
+                    <img src="src/assets/tenis1.jpg" alt="Tênis Nike">
                     <h3>Tênis Nike</h3>
                     <p>R$ 399,90</p>
                 </div>
                 <div class="favorite-card">
-                    <img src="tenis2.jpg" alt="Tênis Adidas">
+                    <img src="src/assets/tenis2.jpg" alt="Tênis Adidas">
                     <h3>Tênis Adidas</h3>
                     <p>R$ 349,90</p>
                 </div>
                 <div class="favorite-card">
-                    <img src="tenis3.jpg" alt="Tênis Puma">
+                    <img src="src/assets/tenis3.jpg" alt="Tênis Puma">
                     <h3>Tênis Puma</h3>
                     <p>R$ 299,90</p>
                 </div>
                 <div class="favorite-card">
-                    <img src="tenis4.jpg" alt="Tênis Asics">
+                    <img src="src/assets/tenis4.jpg" alt="Tênis Asics">
                     <h3>Tênis Asics</h3>
                     <p>R$ 319,90</p>
                 </div>
@@ -57,28 +57,13 @@
         <section class="brands">
             <h2>Marcas</h2>
             <div class="brand-logos">
-                <div class="brand"><img src="nike.jpg" alt="Nike"></div>
-                <div class="brand"><img src="adidas.jpg" alt="Adidas"></div>
-                <div class="brand"><img src="puma.jpg" alt="Puma"></div>
-                <div class="brand"><img src="asics.jpg" alt="Asics"></div>
+                <div class="brand"><img src="src/assets/nike.jpg" alt="Nike"></div>
+                <div class="brand"><img src="src/assets/adidas.jpg" alt="Adidas"></div>
+                <div class="brand"><img src="src/assets/puma.jpg" alt="Puma"></div>
+                <div class="brand"><img src="src/assets/asics.jpg" alt="Asics"></div>
             </div>
         </section>
     </main>
 
-    <script>
-        const images = ["imagem1.jpg", "imagem2.jpg"];
-        let currentIndex = 0;
-        const sliderImg = document.getElementById("slider-img");
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % images.length;
-            sliderImg.src = images[currentIndex];
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            sliderImg.src = images[currentIndex];
-        }
-    </script>
 </body>
 </html>
