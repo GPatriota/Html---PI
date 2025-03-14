@@ -9,6 +9,8 @@ import { routes } from './app/app.routes';
   standalone: true,
   imports: [HeaderComponent, RouterOutlet],
   template: `
+    <app-header></app-header>
+    <router-outlet></router-outlet>
   `
 })
 export class App {}
