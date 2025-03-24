@@ -1,19 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
 import { Product } from '../../models/product.model';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule ],
+  imports: [CommonModule, FormsModule],
   template: `
-    <div class="products-page">
+    <div class="product-page">
       <div class="filters">
-        <input
+        <img [src]="product.imageUrl" alt="">
+        <div>
+          <h1>{{product.name}}</h1>
+          <h1>{{product.brand}}</h1>
+          <h1>{{product.price}}</h1>
+
+
+        </div>
+        <!-- <input
           type="text"
           [(ngModel)]="searchQuery"
           (input)="filterProducts()"
@@ -40,14 +48,12 @@ import { RouterModule } from '@angular/router';
 
       <div class="products-grid">
         <div *ngFor="let product of filteredProducts" class="product-card">
-          <a [routerLink]="['/product', product.id]">
-            <img [src]="product.imageUrl" [alt]="product.name" />
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.brand }}</p>
-            <p class="price">{{ product.price | number:'1.2-2' }}</p>
-          </a>
+          <img [src]="product.imageUrl" [alt]="product.name" />
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.brand }}</p>
+          <p class="price">{{ product.price | number:'1.2-2' }}</p>
         </div>
-      </div>
+      </div> -->
     </div>
   `,
   styles: [`
@@ -110,12 +116,8 @@ import { RouterModule } from '@angular/router';
     }
   `]
 })
-export class ProductsComponent {
-  searchQuery = '';
-  selectedBrand = '';
-  filteredProducts: Product[] = [];
-  isAdmin = false;
-  newProduct: Product = {
+export class ProductComponent implements OnInit {
+  product: Product = {
     id: '',
     name: '',
     price: 0,
@@ -125,45 +127,29 @@ export class ProductsComponent {
 
   constructor(
     private productService: ProductService,
-    private authService: AuthService
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
-    this.filterProducts();
-    this.authService.currentUser$.subscribe(user => {
-      this.isAdmin = user?.isAdmin || false;
+
+  }
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      const productId = params.get('id');
+
+      if(productId){
+        const product = this.productService.getProductById(productId) 
+        
+        if(product) {
+          this.product = product
+          return 
+        } 
+
+        this.router.navigate([''])
+        return 
+      }
+
+      this.router.navigate([''])
     });
-  }
 
-  filterProducts() {
-    let products = this.productService.getProducts();
-    
-    if (this.searchQuery) {
-      products = products.filter(product => 
-        product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    }
-    
-    if (this.selectedBrand) {
-      products = products.filter(product => product.brand === this.selectedBrand);
-    }
-    
-    this.filteredProducts = products;
-  }
-
-  addProduct() {
-    if (!this.isAdmin) return;
-    
-    this.newProduct.id = Date.now().toString();
-    this.productService.addProduct({ ...this.newProduct });
-    
-    this.newProduct = {
-      id: '',
-      name: '',
-      price: 0,
-      brand: '',
-      imageUrl: ''
-    };
-    
-    this.filterProducts();
   }
 }
