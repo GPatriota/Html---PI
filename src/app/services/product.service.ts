@@ -52,4 +52,12 @@ export class ProductService {
   getProducts(): Product[] {
     return this.products;
   }
+
+  getProductById(id: string): Product | null {
+    const product = this.products.find(product => product.id === id);
+
+    if(!product) return null
+
+    return product
+  }
 }
