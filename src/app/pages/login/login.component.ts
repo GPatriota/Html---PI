@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   template: `
     <div class="login-container">
       <form (ngSubmit)="onSubmit()" class="login-form">
-        <h2>Login</h2>
+        <h2>Welcome Back!</h2> <!-- Estilizamos o título para maior destaque -->
         
         <div class="form-group">
           <label for="username">Username</label>
@@ -21,6 +21,7 @@ import { AuthService } from '../../services/auth.service';
             [(ngModel)]="username"
             name="username"
             required
+            placeholder="Enter your username" 
           />
         </div>
         
@@ -32,6 +33,7 @@ import { AuthService } from '../../services/auth.service';
             [(ngModel)]="password"
             name="password"
             required
+            placeholder="Enter your password" 
           />
         </div>
         
@@ -42,48 +44,66 @@ import { AuthService } from '../../services/auth.service';
     </div>
   `,
   styles: [`
+    /* Layout centralizado e estilizado */
     .login-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 80vh;
+      min-height: 100vh; /* Alteramos para ocupar toda a tela */
+      background: linear-gradient(135deg, #667eea, #764ba2); /* Fundo com gradiente bonito */
+      padding: 20px;
     }
+    
+    /* Estilização do formulário */
     .login-form {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
       width: 100%;
       max-width: 400px;
+      text-align: center; /* Centralizar elementos */
     }
+    
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
+    
     label {
       display: block;
       margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #333;
     }
+    
     input {
       width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
     }
+    
     button {
       width: 100%;
-      padding: 0.75rem;
-      background: #2c5282;
+      padding: 0.85rem;
+      background: #4c51bf;
       color: white;
+      font-size: 1rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease-in-out;
     }
+    
     button:hover {
-      background: #2a4365;
+      background: #3730a3;
     }
+    
     .error {
       color: red;
       margin-top: 1rem;
+      font-size: 0.9rem;
     }
   `]
 })

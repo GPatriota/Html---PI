@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   template: `
     <div class="register-container">
       <form (ngSubmit)="onSubmit()" class="register-form">
-        <h2>Register</h2>
+        <h2>Create Your Account</h2> 
         
         <div class="form-group">
           <label for="username">Username</label>
@@ -20,6 +20,42 @@ import { AuthService } from '../../services/auth.service';
             id="username"
             [(ngModel)]="username"
             name="username"
+            required
+            placeholder="Choose a username"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input
+            type="text"
+            id="cpf"
+            [(ngModel)]="cpf"
+            name="cpf"
+            required
+            placeholder="Enter your CPF"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            [(ngModel)]="dob"
+            name="dob"
             required
           />
         </div>
@@ -32,6 +68,19 @@ import { AuthService } from '../../services/auth.service';
             [(ngModel)]="password"
             name="password"
             required
+            placeholder="Enter a password"
+          />
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            required
+            placeholder="Re-enter your password"
           />
         </div>
         
@@ -46,50 +95,70 @@ import { AuthService } from '../../services/auth.service';
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 80vh;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      padding: 20px;
     }
+    
     .register-form {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       width: 100%;
       max-width: 400px;
+      text-align: center;
     }
+    
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
+    
     label {
       display: block;
       margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #333;
     }
+    
     input {
       width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
     }
+    
     button {
       width: 100%;
-      padding: 0.75rem;
-      background: #2c5282;
+      padding: 0.85rem;
+      background: #4c51bf;
       color: white;
+      font-size: 1rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s ease-in-out;
     }
+    
     button:hover {
-      background: #2a4365;
+      background: #3730a3;
     }
+    
     .error {
       color: red;
       margin-top: 1rem;
+      font-size: 0.9rem;
     }
   `]
 })
 export class RegisterComponent {
   username = '';
+  email = '';
+  cpf = '';
+  dob = '';
   password = '';
+  confirmPassword = '';
   error = '';
 
   constructor(
@@ -98,10 +167,15 @@ export class RegisterComponent {
   ) {}
 
   onSubmit() {
-    if (this.authService.register(this.username, this.password)) {
+    if (this.password !== this.confirmPassword) {
+      this.error = 'Passwords do not match';
+      return;
+    }
+    
+    if (this.authService.register(this.username, this.email, this.cpf, this.dob, this.password)) {
       this.router.navigate(['/login']);
     } else {
-      this.error = 'Username already exists';
+      this.error = 'Username or email already exists';
     }
   }
 }
