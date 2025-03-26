@@ -18,7 +18,7 @@ export class AuthService {
 
   login(username: string, password: string): boolean {
     if (username === 'admin' && password === 'admin') {
-      const adminUser: User = { username, password, isAdmin: true };
+      const adminUser: User = { username, email: '', cpf: '', birthDate: '', password, isAdmin: true };
       localStorage.setItem('currentUser', JSON.stringify(adminUser));
       this.currentUserSubject.next(adminUser);
       return true;
@@ -36,13 +36,17 @@ export class AuthService {
     return false;
   }
 
-  register(username: string, password: string): boolean {
+  register(username: string, email: string, cpf: string, birthDate: string, password: string, confirmPassword?: string): boolean {
     const users = this.getUsers();
-    if (users.some(u => u.username === username)) {
+    if (users.some(u => u.username === username || u.email === email || u.cpf === cpf)) {
+      return false;
+    }
+    
+    if (password !== confirmPassword) {
       return false;
     }
 
-    const newUser: User = { username, password, isAdmin: false };
+    const newUser: User = { username, email, cpf, birthDate, password, isAdmin: false };
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     return true;
