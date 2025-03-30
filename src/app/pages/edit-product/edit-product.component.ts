@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
@@ -12,7 +12,7 @@ import { Product } from '../../models/product.model';
   template: `
     <div class="edit-product-container">
       <h2>Edit Product</h2>
-      <form (ngSubmit)="onSubmit()" class="product-form" *ngIf="product">
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="product-form" *ngIf="product">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -21,7 +21,12 @@ import { Product } from '../../models/product.model';
             [(ngModel)]="product.name"
             name="name"
             required
+            #name="ngModel"
+            [class.invalid]="name.touched && name.invalid"
           />
+          <div *ngIf="name.touched && name.invalid" class="error-message">
+            Name is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -32,16 +37,25 @@ import { Product } from '../../models/product.model';
             [(ngModel)]="product.price"
             name="price"
             required
+            #price="ngModel"
+            [class.invalid]="price.touched && price.invalid"
           />
+          <div *ngIf="price.touched && price.invalid" class="error-message">
+            Price is required.
+          </div>
         </div>
 
-       <div class="form-group">
+        <div class="form-group">
           <label for="brand">Brand</label>
-          <select id="brand" [(ngModel)]="product.brand" name="brand" required>
+          <select id="brand" [(ngModel)]="product.brand" name="brand" required #brand="ngModel" [class.invalid]="brand.touched && brand.invalid">
+            <option value="">Select Brand</option>
             <option value="Nike">Nike</option>
             <option value="Puma">Puma</option>
             <option value="Adidas">Adidas</option>
           </select>
+          <div *ngIf="brand.touched && brand.invalid" class="error-message">
+            Brand is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -50,7 +64,6 @@ import { Product } from '../../models/product.model';
             id="description"
             [(ngModel)]="product.description"
             name="description"
-            required
             rows="4"
           ></textarea>
         </div>
@@ -62,11 +75,17 @@ import { Product } from '../../models/product.model';
             [(ngModel)]="product.gender"
             name="gender"
             required
+            #gender="ngModel"
+            [class.invalid]="gender.touched && gender.invalid"
           >
+            <option value="">Select Gender</option>
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
             <option value="unissex">Unissex</option>
           </select>
+          <div *ngIf="gender.touched && gender.invalid" class="error-message">
+            Gender is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -77,78 +96,98 @@ import { Product } from '../../models/product.model';
             [(ngModel)]="product.imageUrl"
             name="imageUrl"
             required
+            #imageUrl="ngModel"
+            [class.invalid]="imageUrl.touched && imageUrl.invalid"
           />
+          <div *ngIf="imageUrl.touched && imageUrl.invalid" class="error-message">
+            Image URL is required.
+          </div>
         </div>
 
         <div class="button-group">
-          <button type="submit" class="submit-btn">Save Changes</button>
+          <button type="submit" class="submit-btn" [disabled]="form.invalid">Save Changes</button>
           <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
         </div>
       </form>
     </div>
   `,
-  styles: [`
-    .edit-product-container {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #2c5282;
-      margin-bottom: 1.5rem;
-    }
-    .product-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    label {
-      font-weight: 500;
-    }
-    input, select, textarea {
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    textarea {
-      resize: vertical;
-    }
-    .button-group {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    button {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .submit-btn {
-      background: #2c5282;
-      color: white;
-    }
-    .submit-btn:hover {
-      background: #2a4365;
-    }
-    .cancel-btn {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-    .cancel-btn:hover {
-      background: #cbd5e0;
-    }
-  `]
+  styles: [
+    `
+      .edit-product-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #2c5282;
+        margin-bottom: 1.5rem;
+      }
+      .product-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      label {
+        font-weight: 500;
+      }
+      input,
+      select,
+      textarea {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+      textarea {
+        resize: vertical;
+      }
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .submit-btn {
+        background: #2c5282;
+        color: white;
+      }
+      .submit-btn:hover {
+        background: #2a4365;
+      }
+      .cancel-btn {
+        background: #e2e8f0;
+        color: #4a5568;
+      }
+      .cancel-btn:hover {
+        background: #cbd5e0;
+      }
+
+      /* Red invalid fields */
+      .invalid {
+        border-color: red;
+      }
+
+      /* Error message */
+      .error-message {
+        color: red;
+        font-size: 0.875rem;
+      }
+    `,
+  ],
 })
 export class EditProductComponent implements OnInit {
   product: Product | null = null;
@@ -170,10 +209,12 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (this.product) {
-      this.productService.updateProduct(this.product);
-      this.router.navigate(['/products']);
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      if (this.product) {
+        this.productService.updateProduct(this.product);
+        this.router.navigate(['/products']);
+      }
     }
   }
 

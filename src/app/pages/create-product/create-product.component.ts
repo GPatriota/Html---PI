@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../models/product.model";
@@ -12,7 +12,7 @@ import { Product } from "../../models/product.model";
   template: `
     <div class="create-product-container">
       <h2>Create New Product</h2>
-      <form (ngSubmit)="onSubmit()" class="product-form">
+      <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="product-form">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -21,7 +21,12 @@ import { Product } from "../../models/product.model";
             [(ngModel)]="product.name"
             name="name"
             required
+            #name="ngModel"
+            [ngClass]="{'error': name.invalid && (name.touched || isSubmitted)}"
           />
+          <div *ngIf="name.invalid && (name.touched || isSubmitted)" class="error-message">
+            Name is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -32,16 +37,32 @@ import { Product } from "../../models/product.model";
             [(ngModel)]="product.price"
             name="price"
             required
+            #price="ngModel"
+            [ngClass]="{'error': price.invalid && (price.touched || isSubmitted)}"
           />
+          <div *ngIf="price.invalid && (price.touched || isSubmitted)" class="error-message">
+            Price is required.
+          </div>
         </div>
 
         <div class="form-group">
           <label for="brand">Brand</label>
-          <select id="brand" [(ngModel)]="product.brand" name="brand" required>
+          <select
+            id="brand"
+            [(ngModel)]="product.brand"
+            name="brand"
+            required
+            #brand="ngModel"
+            [ngClass]="{'error': brand.invalid && (brand.touched || isSubmitted)}"
+          >
+            <option value="">Select Brand</option>
             <option value="Nike">Nike</option>
             <option value="Puma">Puma</option>
             <option value="Adidas">Adidas</option>
           </select>
+          <div *ngIf="brand.invalid && (brand.touched || isSubmitted)" class="error-message">
+            Brand is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -50,8 +71,8 @@ import { Product } from "../../models/product.model";
             id="description"
             [(ngModel)]="product.description"
             name="description"
-            required
             rows="4"
+            #description="ngModel"
           ></textarea>
         </div>
 
@@ -62,11 +83,16 @@ import { Product } from "../../models/product.model";
             [(ngModel)]="product.gender"
             name="gender"
             required
+            #gender="ngModel"
+            [ngClass]="{'error': gender.invalid && (gender.touched || isSubmitted)}"
           >
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
             <option value="unissex">Unissex</option>
           </select>
+          <div *ngIf="gender.invalid && (gender.touched || isSubmitted)" class="error-message">
+            Gender is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -77,11 +103,18 @@ import { Product } from "../../models/product.model";
             [(ngModel)]="product.imageUrl"
             name="imageUrl"
             required
+            #imageUrl="ngModel"
+            [ngClass]="{'error': imageUrl.invalid && (imageUrl.touched || isSubmitted)}"
           />
+          <div *ngIf="imageUrl.invalid && (imageUrl.touched || isSubmitted)" class="error-message">
+            Image URL is required.
+          </div>
         </div>
 
         <div class="button-group">
-          <button type="submit" class="submit-btn">Create Product</button>
+          <button type="submit" class="submit-btn" [disabled]="productForm.invalid">
+            Create Product
+          </button>
           <button type="button" class="cancel-btn" (click)="cancel()">
             Cancel
           </button>
@@ -153,10 +186,18 @@ import { Product } from "../../models/product.model";
       .cancel-btn:hover {
         background: #cbd5e0;
       }
+      .error-message {
+        color: red;
+        font-size: 0.875rem;
+      }
+      .error {
+        border-color: red;
+      }
     `,
   ],
 })
 export class CreateProductComponent {
+  @ViewChild("productForm") productForm!: NgForm;
   product: Product = {
     id: "",
     name: "",
@@ -166,13 +207,19 @@ export class CreateProductComponent {
     description: "",
     gender: "unissex",
   };
+  isSubmitted = false; // Flag to trigger error messages even when not interacted with fields.
 
   constructor(private productService: ProductService, private router: Router) {}
 
   onSubmit() {
-    this.product.id = Date.now().toString();
-    this.productService.addProduct({ ...this.product });
-    this.router.navigate(["/products"]);
+    this.isSubmitted = true; // Set to true when the form is submitted
+    this.productForm.form.markAllAsTouched(); // Mark all fields as touched to trigger error messages.
+
+    if (this.productForm.valid) {
+      this.product.id = Date.now().toString();
+      this.productService.addProduct({ ...this.product });
+      this.router.navigate(["/products"]);
+    }
   }
 
   cancel() {
