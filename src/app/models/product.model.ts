@@ -4,4 +4,6 @@ export interface Product {
   price: number;
   brand: string;
   imageUrl: string;
+  description: string; 
+  gender: 'masculino' | 'feminino' | 'unissex'; 
 }

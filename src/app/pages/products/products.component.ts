@@ -120,7 +120,9 @@ export class ProductsComponent {
     name: '',
     price: 0,
     brand: '',
-    imageUrl: ''
+    imageUrl: '',
+    gender: 'unissex',
+    description: ''
   };
 
   constructor(
@@ -139,7 +141,8 @@ export class ProductsComponent {
     if (this.searchQuery) {
       products = products.filter(product => 
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(this.searchQuery.toLowerCase())
+        product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(this.searchQuery.toLowerCase()) // Agora pesquisa na descrição também
       );
     }
     
@@ -161,9 +164,12 @@ export class ProductsComponent {
       name: '',
       price: 0,
       brand: '',
-      imageUrl: ''
+      imageUrl: '',
+      gender: 'unissex',
+      description: ''
     };
     
     this.filterProducts();
   }
 }
+
