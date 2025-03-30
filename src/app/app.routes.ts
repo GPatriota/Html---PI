@@ -4,7 +4,10 @@ import { ProductsComponent } from './pages/products/products.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { CreateProductComponent } from './pages/create-product/create-product.component';
+import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { ProductComponent } from './pages/product/product.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +15,8 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'create-product', component: CreateProductComponent },
   { path: 'product/:id', component: ProductComponent },
+  { path: 'edit-product/:id', component: EditProductComponent },
   { path: '**', redirectTo: '' }
 ];

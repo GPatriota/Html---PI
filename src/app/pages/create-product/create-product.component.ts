@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/product.model';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ProductService } from "../../services/product.service";
+import { Product } from "../../models/product.model";
 
 @Component({
-  selector: 'app-create-product',
+  selector: "app-create-product",
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
@@ -37,24 +37,11 @@ import { Product } from '../../models/product.model';
 
         <div class="form-group">
           <label for="brand">Brand</label>
-          <input
-            type="text"
-            id="brand"
-            [(ngModel)]="product.brand"
-            name="brand"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="size">Size</label>
-          <input
-            type="text"
-            id="size"
-            [(ngModel)]="product.size"
-            name="size"
-            required
-          />
+          <select id="brand" [(ngModel)]="product.brand" name="brand" required>
+            <option value="Nike">Nike</option>
+            <option value="Puma">Puma</option>
+            <option value="Adidas">Adidas</option>
+          </select>
         </div>
 
         <div class="form-group">
@@ -95,97 +82,100 @@ import { Product } from '../../models/product.model';
 
         <div class="button-group">
           <button type="submit" class="submit-btn">Create Product</button>
-          <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+          <button type="button" class="cancel-btn" (click)="cancel()">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
   `,
-  styles: [`
-    .create-product-container {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #2c5282;
-      margin-bottom: 1.5rem;
-    }
-    .product-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    label {
-      font-weight: 500;
-    }
-    input, select, textarea {
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    textarea {
-      resize: vertical;
-    }
-    .button-group {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    button {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .submit-btn {
-      background: #2c5282;
-      color: white;
-    }
-    .submit-btn:hover {
-      background: #2a4365;
-    }
-    .cancel-btn {
-      background: #e2e8f0;
-      color: #4a5568;
-    }
-    .cancel-btn:hover {
-      background: #cbd5e0;
-    }
-  `]
+  styles: [
+    `
+      .create-product-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #2c5282;
+        margin-bottom: 1.5rem;
+      }
+      .product-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      label {
+        font-weight: 500;
+      }
+      input,
+      select,
+      textarea {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+      textarea {
+        resize: vertical;
+      }
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .submit-btn {
+        background: #2c5282;
+        color: white;
+      }
+      .submit-btn:hover {
+        background: #2a4365;
+      }
+      .cancel-btn {
+        background: #e2e8f0;
+        color: #4a5568;
+      }
+      .cancel-btn:hover {
+        background: #cbd5e0;
+      }
+    `,
+  ],
 })
 export class CreateProductComponent {
   product: Product = {
-    id: '',
-    name: '',
+    id: "",
+    name: "",
     price: 0,
-    brand: '',
-    imageUrl: '',
-    description: '',
-    gender: 'unissex'
+    brand: "",
+    imageUrl: "",
+    description: "",
+    gender: "unissex",
   };
 
-  constructor(
-    private productService: ProductService,
-    private router: Router
-  ) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   onSubmit() {
     this.product.id = Date.now().toString();
     this.productService.addProduct({ ...this.product });
-    this.router.navigate(['/products']);
+    this.router.navigate(["/products"]);
   }
 
   cancel() {
-    this.router.navigate(['/products']);
+    this.router.navigate(["/products"]);
   }
 }

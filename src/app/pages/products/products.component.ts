@@ -1,46 +1,56 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProductService } from '../../services/product.service';
-import { AuthService } from '../../services/auth.service';
-import { Product } from '../../models/product.model';
-import { RouterModule } from '@angular/router';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Router, RouterModule } from "@angular/router";
+import { ProductService } from "../../services/product.service";
+import { AuthService } from "../../services/auth.service";
+import { Product } from "../../models/product.model";
+import { DeleteModalComponent } from "../../components/delete-modal/delete-modal.component";
 
 @Component({
-  selector: 'app-products',
+  selector: "app-products",
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule ],
+  imports: [CommonModule, FormsModule, DeleteModalComponent, RouterModule ],
   template: `
     <div class="products-page">
-      <div class="filters">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          (input)="filterProducts()"
-          placeholder="Search products..."
-          class="search-input"
-        />
-        
-        <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
-          <option value="">All Brands</option>
-          <option value="Nike">Nike</option>
-          <option value="Adidas">Adidas</option>
-          <option value="Puma">Puma</option>
-        </select>
-      </div>
+      <div class="header">
+        <div class="filters">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="filterProducts()"
+            placeholder="Search products..."
+            class="search-input"
+          />
 
-      <div *ngIf="isAdmin" class="add-product">
-        <h3>Add New Product</h3>
-        <input [(ngModel)]="newProduct.name" placeholder="Name" />
-        <input [(ngModel)]="newProduct.price" type="number" placeholder="Price" />
-        <input [(ngModel)]="newProduct.brand" placeholder="Brand" />
-        <input [(ngModel)]="newProduct.imageUrl" placeholder="Image URL" />
-        <button (click)="addProduct()">Add Product</button>
+          <select
+            [(ngModel)]="selectedBrand"
+            (change)="filterProducts()"
+            class="brand-select"
+          >
+            <option value="">All Brands</option>
+            <option value="Nike">Nike</option>
+            <option value="Adidas">Adidas</option>
+            <option value="Puma">Puma</option>
+          </select>
+        </div>
+
+        <button *ngIf="isAdmin" class="add-btn" (click)="navigateToCreate()">
+          Add New
+        </button>
       </div>
 
       <div class="products-grid">
         <div *ngFor="let product of filteredProducts" class="product-card">
-          <a [routerLink]="['/product', product.id]">
+          <div class="admin-controls" *ngIf="isAdmin">
+            <button class="edit-btn" (click)="editProduct(product.id)">
+              ✏️
+            </button>
+            <button class="delete-btn" (click)="openDeleteModal(product.id)">
+              🗑️
+            </button>
+          </div>
+           <a [routerLink]="['/product', product.id]">
             <img [src]="product.imageUrl" [alt]="product.name" />
             <h3>{{ product.name }}</h3>
             <p>{{ product.brand }}</p>
@@ -49,127 +59,173 @@ import { RouterModule } from '@angular/router';
         </div>
       </div>
     </div>
+
+    <app-delete-modal
+      [isOpen]="showDeleteModal"
+      (onConfirm)="confirmDelete()"
+      (onCancel)="cancelDelete()"
+    ></app-delete-modal>
   `,
-  styles: [`
-    .products-page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .filters {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .search-input, .brand-select {
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-    .product-card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .product-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    .price {
-      font-weight: bold;
-      color: #2c5282;
-    }
-    .add-product {
-      margin-bottom: 2rem;
-      padding: 1rem;
-      background: #f5f5f5;
-      border-radius: 8px;
-    }
-    .add-product input {
-      display: block;
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      width: 100%;
-      max-width: 300px;
-    }
-    .add-product button {
-      background: #2c5282;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  `]
+  styles: [
+    `
+      .products-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .filters {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .search-input,
+      .brand-select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .add-btn {
+        padding: 0.75rem 1.5rem;
+        background: #2c5282;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .add-btn:hover {
+        background: #2a4365;
+      }
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      .product-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+        position: relative;
+        background: white;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+      .product-card h3 {
+        margin: 0.5rem 0;
+        color: #2d3748;
+      }
+      .price {
+        font-weight: bold;
+        color: #2c5282;
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
+      .admin-controls {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .edit-btn,
+      .delete-btn {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .edit-btn:hover,
+      .delete-btn:hover {
+        background: #f5f5f5;
+      }
+    `,
+  ],
 })
 export class ProductsComponent {
-  searchQuery = '';
-  selectedBrand = '';
+  searchQuery = "";
+  selectedBrand = "";
   filteredProducts: Product[] = [];
   isAdmin = false;
-  newProduct: Product = {
-    id: '',
-    name: '',
-    price: 0,
-    brand: '',
-    imageUrl: '',
-    gender: 'unissex',
-    description: ''
-  };
+  showDeleteModal = false;
+  productToDelete: string | null = null;
 
   constructor(
     private productService: ProductService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.filterProducts();
-    this.authService.currentUser$.subscribe(user => {
+    this.authService.currentUser$.subscribe((user) => {
       this.isAdmin = user?.isAdmin || false;
     });
   }
 
   filterProducts() {
     let products = this.productService.getProducts();
-    
+
     if (this.searchQuery) {
-      products = products.filter(product => 
-        product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(this.searchQuery.toLowerCase()) // Agora pesquisa na descrição também
+      products = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.brand.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
-    
+
     if (this.selectedBrand) {
-      products = products.filter(product => product.brand === this.selectedBrand);
+      products = products.filter(
+        (product) => product.brand === this.selectedBrand
+      );
     }
-    
+
     this.filteredProducts = products;
   }
 
-  addProduct() {
-    if (!this.isAdmin) return;
-    
-    this.newProduct.id = Date.now().toString();
-    this.productService.addProduct({ ...this.newProduct });
-    
-    this.newProduct = {
-      id: '',
-      name: '',
-      price: 0,
-      brand: '',
-      imageUrl: '',
-      gender: 'unissex',
-      description: ''
-    };
-    
-    this.filterProducts();
+  navigateToCreate() {
+    this.router.navigate(["/create-product"]);
+  }
+
+  editProduct(id: string) {
+    this.router.navigate(["/edit-product", id]);
+  }
+
+  openDeleteModal(id: string) {
+    this.productToDelete = id;
+    this.showDeleteModal = true;
+  }
+
+  confirmDelete() {
+    if (this.productToDelete) {
+      this.productService.deleteProduct(this.productToDelete);
+      this.filterProducts();
+    }
+    this.showDeleteModal = false;
+    this.productToDelete = null;
+  }
+
+  cancelDelete() {
+    this.showDeleteModal = false;
+    this.productToDelete = null;
   }
 }
-
