@@ -23,6 +23,36 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
             class="search-input"
           />
 
+          <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
+          <option value="">All Sizes</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+        </select>
+
+        <select [(ngModel)]="selectedPrice" (change)="filterProducts()" class="brand-select">
+          <option value="">All Prices</option>
+          <option value="0-150">0-150</option>
+          <option value="150-300">150-300</option>
+          <option value="300-450">300-450</option>
+          <option value="450-600">450-600</option>
+
+        </select>
+
+        <select [(ngModel)]="selectedGender" (change)="filterProducts()" class="brand-select">
+          <option value="">All Genders</option>
+          <option value="feminino">Feminino</option>
+          <option value="masculino">Masculino</option>
+          <option value="unissex">Unissex</option>
+
+        </select>
+
           <select
             [(ngModel)]="selectedBrand"
             (change)="filterProducts()"
@@ -58,18 +88,26 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
           </a>
         </div>
       </div>
-    </div>
+    
 
     <app-delete-modal
       [isOpen]="showDeleteModal"
       (onConfirm)="confirmDelete()"
       (onCancel)="cancelDelete()"
     ></app-delete-modal>
+    </div>
   `,
   styles: [
     `
+
+      input::placeholder {
+        color: black;
+      }
+
       .products-page {
-        max-width: 1200px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        max-width: 100%;
         margin: 0 auto;
         padding: 2rem;
       }
@@ -78,17 +116,20 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem;
+        
       }
       .filters {
         display: flex;
         gap: 1rem;
         align-items: center;
       }
-      .search-input,
-      .brand-select {
+      .search-input, .brand-select {
         padding: 0.5rem;
         border: 1px solid #ddd;
-        border-radius: 4px;
+        border-radius: 40px;
+        border-color: #2c5282; /* Cor da borda */
+        color: #000000;
+        background-color: rgb(192, 192, 192); /* Cor de fundo dentro da borda */
       }
       .add-btn {
         padding: 0.75rem 1.5rem;
@@ -116,7 +157,8 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
         padding: 1rem;
         text-align: center;
         position: relative;
-        background: white;
+        border-color: rgb(192, 192, 192);
+        background: rgb(192, 192, 192);
         transition: transform 0.2s, box-shadow 0.2s;
       }
       .product-card:hover {
@@ -166,6 +208,8 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
 export class ProductsComponent {
   searchQuery = "";
   selectedBrand = "";
+  selectedGender = "";
+  selectedPrice = "";
   filteredProducts: Product[] = [];
   isAdmin = false;
   showDeleteModal = false;
@@ -189,15 +233,33 @@ export class ProductsComponent {
       products = products.filter(
         (product) =>
           product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          product.brand.toLowerCase().includes(this.searchQuery.toLowerCase())
+          product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.gender.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
+
+
 
     if (this.selectedBrand) {
       products = products.filter(
         (product) => product.brand === this.selectedBrand
       );
     }
+
+    if (this.selectedGender) {
+      products = products.filter(
+        (product) => product.gender === this.selectedGender
+      );
+    }
+
+    if (this.selectedPrice) {
+      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); // Dividindo o intervalo de preço
+  
+      products = products.filter(product => 
+        product.price >= minPrice && product.price <= maxPrice
+      );
+    }
+
 
     this.filteredProducts = products;
   }

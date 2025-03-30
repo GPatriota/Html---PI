@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
+  <div class="container">
     <div class="home">
       <div class="banner">
         <h1>Welcome to ShoeStore</h1>
@@ -22,8 +23,16 @@ import { CommonModule } from '@angular/common';
         </div>
       </div>
     </div>
+  </div>
   `,
   styles: [`
+
+    .container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        max-width: 100%;
+    }
+
     .home {
       max-width: 1200px;
       margin: 0 auto;
