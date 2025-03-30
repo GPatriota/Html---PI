@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
+  <div class="container">
     <div class="about">
       <h1>About Us</h1>
       <p>Welcome to ShoeStore, your premier destination for quality footwear. We pride ourselves on offering a curated selection of the world's top shoe brands.</p>
@@ -24,8 +25,16 @@ import { Component } from '@angular/core';
         </ul>
       </div>
     </div>
+  </div>
   `,
   styles: [`
+
+    .container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        max-width: 100%;
+    }
+
     .about {
       max-width: 800px;
       margin: 0 auto;
