@@ -34,7 +34,7 @@ import { Component } from '@angular/core';
   styles: [`
 
     .container {
-        min-height: 100vh;
+        min-height: 120vh;
         background: linear-gradient(135deg, #667eea, #764ba2);
         max-width: 100%;
     }
