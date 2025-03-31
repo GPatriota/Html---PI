@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   <div class="container">
     <div class="about">
       <h1>About Us</h1>
-      <p>Welcome to ShoeStore, your premier destination for quality footwear. We pride ourselves on offering a curated selection of the world's top shoe brands.</p>
+      <p>Welcom to ShoeStore, your premier destination for quality footwear. We pride ourselves on offering a curated selection of the world's top shoe brands.</p>
       
       <div class="mission">
         <h2>Our Mission</h2>
