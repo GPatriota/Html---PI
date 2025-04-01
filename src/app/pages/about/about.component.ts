@@ -10,9 +10,9 @@ import { Component } from '@angular/core';
       <h1>Sobre nós</h1>
       <p> Uma empresa, dedicada a oferecer os melhores tênis do mercado, combinando design moderno, conforto e alta durabilidade.</p>
       <h3> Nossa História</h3>
-      <p> Em 2025, nasceu a/o com um propósito claro: oferecer aos nossos clientes a melhor experiência possível no universo dos tênis.
+      <p> Em 2025, nasceu a shoeStore com um propósito claro: oferecer aos nossos clientes a melhor experiência possível no universo dos tênis.
       Desde o início, adotamos uma abordagem focada na qualidade e sustentabilidade. Nossos produtos são desenvolvidos com materiais de alta performance e tecnologias avançadas, sempre respeitando o meio ambiente e buscando minimizar nosso impacto ecológico.
-      <p>Estamos comprometidos em oferecer um atendimento personalizado e acessível, garantindo que cada cliente encontre o tênis ideal para seu estilo e necessidade. <p/>
+      <p>Estamos comprometidos em oferecer um atendimento personalizado e acessível, garantindo que cada cliente encontre o tênis ideal para seu estilo e necessidade. </p>
       <div class="Missão">
         <h2>Missão</h2>
         <p>Oferecer aos nossos clientes a melhor seleção de calçados, aliando estilo, conforto e qualidade a preços competitivos.</p>
@@ -37,9 +37,8 @@ import { Component } from '@angular/core';
   styles: [`
 
     .container {
-        min-height: 120vh;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        max-width: 100%;
+        heigh: 100%;
+        max-width: 1000px;
     }
 
     .about {
