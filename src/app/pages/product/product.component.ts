@@ -16,16 +16,16 @@ import { ActivatedRoute, Router } from '@angular/router';
          <h1 class="product-title">{{product.name}}</h1>
 
          <div class="stats">
-          <span>Code: <b>{{product.id}}</b></span>
-          <span>Brand: <b>{{product.brand}}</b></span>
-          <span>Gender: <b>{{product.gender}}</b></span>
+          <span>Id: <b>{{product.id}}</b></span>
+          <span>Marca: <b>{{product.brand}}</b></span>
+          <span>Sexo: <b>{{product.gender}}</b></span>
          </div>
 
          <p class="product-description">{{product.description}}</p>
          
          <h2 class="product-price">{{"R$" + product.price}}</h2>
 
-         <div class="preferences">
+         <!-- <div class="preferences">
           <div class="color">
             <span>Cores</span>
             <div class="color-options">
@@ -39,7 +39,7 @@ import { ActivatedRoute, Router } from '@angular/router';
               <span class="checkmark" style="background: gray;"></span>
             </label>
           </div>
-          </div>
+          </div> -->
           
           <div class="product-buttons">
           <div class="quantity-selector">
@@ -48,9 +48,9 @@ import { ActivatedRoute, Router } from '@angular/router';
             <button class="btn plus" (click)="increment()">+</button>
           </div>
 
-            <button class="add-to-cart">Add to cart</button>
+            <button class="add-to-cart">Adicionar ao carrinho</button>
             
-            <button class="buy-now">Buy now</button>
+            <button class="buy-now">Comprar agora</button>
           </div>
     </div>
   `,

@@ -11,10 +11,10 @@ import { Product } from "../../models/product.model";
   imports: [CommonModule, FormsModule],
   template: `
     <div class="create-product-container">
-      <h2>Create New Product</h2>
+      <h2>Criando novo produto</h2>
       <form (ngSubmit)="onSubmit()" #productForm="ngForm" class="product-form">
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">Nome</label>
           <input
             type="text"
             id="name"
@@ -25,12 +25,12 @@ import { Product } from "../../models/product.model";
             [ngClass]="{'error': name.invalid && (name.touched || isSubmitted)}"
           />
           <div *ngIf="name.invalid && (name.touched || isSubmitted)" class="error-message">
-            Name is required.
+            Nome é obrigatório
           </div>
         </div>
 
         <div class="form-group">
-          <label for="price">Price</label>
+          <label for="price">Preço</label>
           <input
             type="number"
             id="price"
@@ -41,12 +41,12 @@ import { Product } from "../../models/product.model";
             [ngClass]="{'error': price.invalid && (price.touched || isSubmitted)}"
           />
           <div *ngIf="price.invalid && (price.touched || isSubmitted)" class="error-message">
-            Price is required.
+            Preço é obrigatório
           </div>
         </div>
 
         <div class="form-group">
-          <label for="brand">Brand</label>
+          <label for="brand">Marca</label>
           <select
             id="brand"
             [(ngModel)]="product.brand"
@@ -55,18 +55,18 @@ import { Product } from "../../models/product.model";
             #brand="ngModel"
             [ngClass]="{'error': brand.invalid && (brand.touched || isSubmitted)}"
           >
-            <option value="">Select Brand</option>
+            <option value="">Selecione uma marca</option>
             <option value="Nike">Nike</option>
             <option value="Puma">Puma</option>
             <option value="Adidas">Adidas</option>
           </select>
           <div *ngIf="brand.invalid && (brand.touched || isSubmitted)" class="error-message">
-            Brand is required.
+            Marca é obrigatório
           </div>
         </div>
 
         <div class="form-group">
-          <label for="description">Description</label>
+          <label for="description">Descrição</label>
           <textarea
             id="description"
             [(ngModel)]="product.description"
@@ -77,7 +77,7 @@ import { Product } from "../../models/product.model";
         </div>
 
         <div class="form-group">
-          <label for="gender">Gender</label>
+          <label for="gender">Sexo</label>
           <select
             id="gender"
             [(ngModel)]="product.gender"
@@ -86,12 +86,13 @@ import { Product } from "../../models/product.model";
             #gender="ngModel"
             [ngClass]="{'error': gender.invalid && (gender.touched || isSubmitted)}"
           >
+            <option value="">Selecione um sexo</option>
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
             <option value="unissex">Unissex</option>
           </select>
           <div *ngIf="gender.invalid && (gender.touched || isSubmitted)" class="error-message">
-            Gender is required.
+            Sexo é obrigatório
           </div>
         </div>
 
@@ -107,16 +108,16 @@ import { Product } from "../../models/product.model";
             [ngClass]="{'error': imageUrl.invalid && (imageUrl.touched || isSubmitted)}"
           />
           <div *ngIf="imageUrl.invalid && (imageUrl.touched || isSubmitted)" class="error-message">
-            Image URL is required.
+            Link da imagem é obrigatório
           </div>
         </div>
 
         <div class="button-group">
           <button type="submit" class="submit-btn" [disabled]="productForm.invalid">
-            Create Product
+            Criar produto
           </button>
           <button type="button" class="cancel-btn" (click)="cancel()">
-            Cancel
+            Cancelar
           </button>
         </div>
       </form>

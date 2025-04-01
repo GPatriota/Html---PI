@@ -11,10 +11,10 @@ import { Product } from '../../models/product.model';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="edit-product-container">
-      <h2>Edit Product</h2>
+      <h2>Editando produto</h2>
       <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="product-form" *ngIf="product">
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">Nome</label>
           <input
             type="text"
             id="name"
@@ -25,12 +25,12 @@ import { Product } from '../../models/product.model';
             [class.invalid]="name.touched && name.invalid"
           />
           <div *ngIf="name.touched && name.invalid" class="error-message">
-            Name is required.
+            Nome é obrigatório
           </div>
         </div>
 
         <div class="form-group">
-          <label for="price">Price</label>
+          <label for="price">Preço</label>
           <input
             type="number"
             id="price"
@@ -41,25 +41,25 @@ import { Product } from '../../models/product.model';
             [class.invalid]="price.touched && price.invalid"
           />
           <div *ngIf="price.touched && price.invalid" class="error-message">
-            Price is required.
+            Preço é obrigatório
           </div>
         </div>
 
         <div class="form-group">
-          <label for="brand">Brand</label>
+          <label for="brand">Marca</label>
           <select id="brand" [(ngModel)]="product.brand" name="brand" required #brand="ngModel" [class.invalid]="brand.touched && brand.invalid">
-            <option value="">Select Brand</option>
+            <option value="">Selecione uma marca</option>
             <option value="Nike">Nike</option>
             <option value="Puma">Puma</option>
             <option value="Adidas">Adidas</option>
           </select>
           <div *ngIf="brand.touched && brand.invalid" class="error-message">
-            Brand is required.
+            Marca é obrigatório
           </div>
         </div>
 
         <div class="form-group">
-          <label for="description">Description</label>
+          <label for="description">Descrição</label>
           <textarea
             id="description"
             [(ngModel)]="product.description"
@@ -69,7 +69,7 @@ import { Product } from '../../models/product.model';
         </div>
 
         <div class="form-group">
-          <label for="gender">Gender</label>
+          <label for="gender">Sexo</label>
           <select
             id="gender"
             [(ngModel)]="product.gender"
@@ -78,13 +78,13 @@ import { Product } from '../../models/product.model';
             #gender="ngModel"
             [class.invalid]="gender.touched && gender.invalid"
           >
-            <option value="">Select Gender</option>
+            <option value="">Selecione um sexo</option>
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
             <option value="unissex">Unissex</option>
           </select>
           <div *ngIf="gender.touched && gender.invalid" class="error-message">
-            Gender is required.
+            Sexo é obrigatório
           </div>
         </div>
 
@@ -100,19 +100,20 @@ import { Product } from '../../models/product.model';
             [class.invalid]="imageUrl.touched && imageUrl.invalid"
           />
           <div *ngIf="imageUrl.touched && imageUrl.invalid" class="error-message">
-            Image URL is required.
+            Url da imagem é obrigatório
           </div>
         </div>
 
         <div class="button-group">
-          <button type="submit" class="submit-btn" [disabled]="form.invalid">Save Changes</button>
-          <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+          <button type="submit" class="submit-btn" [disabled]="form.invalid">Salvar alterações</button>
+          <button type="button" class="cancel-btn" (click)="cancel()">Cancelar</button>
         </div>
       </form>
     </div>
   `,
   styles: [
     `
+      
       .edit-product-container {
         max-width: 600px;
         margin: 2rem auto;

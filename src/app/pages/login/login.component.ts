@@ -11,29 +11,29 @@ import { AuthService } from '../../services/auth.service';
   template: `
     <div class="login-container">
       <form (ngSubmit)="onSubmit()" class="login-form">
-        <h2>Welcome Back!</h2> <!-- Estilizamos o título para maior destaque -->
+        <h2>Bem vindo de volta!</h2>
         
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Usuário</label>
           <input
             type="text"
             id="username"
             [(ngModel)]="username"
             name="username"
             required
-            placeholder="Enter your username" 
+            placeholder="Digite seu usuário" 
           />
         </div>
         
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Senha</label>
           <input
             type="password"
             id="password"
             [(ngModel)]="password"
             name="password"
             required
-            placeholder="Enter your password" 
+            placeholder="Digite sua senha" 
           />
         </div>
         
@@ -44,25 +44,24 @@ import { AuthService } from '../../services/auth.service';
     </div>
   `,
   styles: [`
-    /* Layout centralizado e estilizado */
+    
     .login-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* Alteramos para ocupar toda a tela */
-      background: linear-gradient(135deg, #667eea, #764ba2); /* Fundo com gradiente bonito */
+      min-height: 100vh; 
+      background: linear-gradient(135deg, #667eea, #764ba2); 
       padding: 20px;
     }
     
-    /* Estilização do formulário */
+   
     .login-form {
       background: white;
       padding: 2.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
-      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
       max-width: 400px;
-      text-align: center; /* Centralizar elementos */
+      text-align: center; 
     }
     
     .form-group {
@@ -121,7 +120,7 @@ export class LoginComponent {
     if (this.authService.login(this.username, this.password)) {
       this.router.navigate(['/']);
     } else {
-      this.error = 'Invalid username or password';
+      this.error = 'Usuário ou senha incorretos.';
     }
   }
 }
