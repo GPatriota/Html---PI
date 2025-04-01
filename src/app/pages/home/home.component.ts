@@ -12,10 +12,7 @@ import { Router } from "@angular/router";
         <div class="slides">
           <div class="slide" [class.active]="currentSlide === 0">
             <div class="slide-click-area" (click)="goToProducts('Nike')">
-              <img
-                src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&h=400&q=80"
-                alt="Nike"
-              />
+              <img src="/assets/tenis_nike.jpg" alt="Nike" />
               <div class="content">
                 <h1>Conforto e estilo para todos os momentos</h1>
               </div>
@@ -23,10 +20,7 @@ import { Router } from "@angular/router";
           </div>
           <div class="slide" [class.active]="currentSlide === 1">
             <div class="slide-click-area" (click)="goToProducts('New Balance')">
-              <img
-                src="https://images.unsplash.com/photo-1510414050375-8404bd196322?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="New Balance"
-              />
+              <img src="/assets/tenis_new_balance.jpg" alt="New Balance" />
               <div class="content">
                 <h1>Desempenho e qualidade que te acompanham</h1>
               </div>
@@ -34,26 +28,20 @@ import { Router } from "@angular/router";
           </div>
           <div class="slide" [class.active]="currentSlide === 2">
             <div class="slide-click-area" (click)="goToProducts('Puma')">
-              <img
-                src="https://images.unsplash.com/photo-1593548366595-c449f72ccb3d?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Puma"
-              />
+              <img src="/assets/tenis_puma.jpg" alt="Puma" />
               <div class="content">
                 <h1>O seu próximo passo começa aqui.</h1>
               </div>
             </div>
           </div>
           <div class="slide" [class.active]="currentSlide === 3">
-          <div class="slide-click-area" (click)="goToProducts('Adidas')">
-            <img
-              src="https://images.unsplash.com/photo-1588110679566-158c6dea107c"
-              alt="Adidas"
-            />
-            <div class="content">
-              <h1>Sinta a diferença em cada detalhe</h1>
+            <div class="slide-click-area" (click)="goToProducts('Adidas')">
+              <img src="/assets/tenis_adidas.jpg" alt="Adidas" />
+              <div class="content">
+                <h1>Sinta a diferença em cada detalhe</h1>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
       <button class="prev" (click)="changeSlide(-1)">&#10094;</button>
@@ -69,25 +57,19 @@ import { Router } from "@angular/router";
           <h3>Nossos principais parceiros</h3>
           <div class="brand-logos">
             <div class="brand" (click)="goToProducts('Nike')">
-              <img src="https://simpleicons.org/icons/nike.svg" alt="Nike" />
+              <img src="assets/nike.svg" alt="Nike" />
               <span>Nike</span>
             </div>
             <div class="brand" (click)="goToProducts('Adidas')">
-              <img
-                src="https://simpleicons.org/icons/adidas.svg"
-                alt="Adidas"
-              />
+              <img src="assets/adidas.svg" alt="Adidas" />
               <span>Adidas</span>
             </div>
             <div class="brand" (click)="goToProducts('Puma')">
-              <img src="https://simpleicons.org/icons/puma.svg" alt="Puma" />
+              <img src="assets/puma.svg" alt="Puma" />
               <span>Puma</span>
             </div>
             <div class="brand" (click)="goToProducts('New Balance')">
-              <img
-                src="https://simpleicons.org/icons/newbalance.svg"
-                alt="New Balance"
-              />
+              <img src="assets/newbalance.svg" alt="New Balance" />
               <span>New Balance</span>
             </div>
 
@@ -173,12 +155,6 @@ import { Router } from "@angular/router";
         font-weight: bold;
         margin-bottom: 10px;
       }
-
-      .content p {
-        font-size: 1.5rem;
-        font-weight: 300;
-      }
-
       .prev,
       .next {
         position: absolute;
@@ -282,7 +258,6 @@ export class HomeComponent implements OnInit {
   currentSlide = 0;
   private slideInterval: any;
   private totalSlides = 4;
-
   constructor(private router: Router) {}
 
   goToProducts(brand: string) {
@@ -306,9 +281,7 @@ export class HomeComponent implements OnInit {
   }
 
   changeSlide(n: number) {
-    console.log("Current slide:", this.currentSlide);
     this.currentSlide =
       (this.currentSlide + n + this.totalSlides) % this.totalSlides;
-    console.log("New slide:", this.currentSlide);
   }
 }
