@@ -91,7 +91,7 @@ import { Router } from "@angular/router";
       }
 
       .container {
-        min-height: 200vh;
+        min-height: 130vh;
         background: linear-gradient(135deg, #667eea, #764ba2);
         max-width: 100%;
       }
