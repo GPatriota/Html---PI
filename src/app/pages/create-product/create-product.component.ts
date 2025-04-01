@@ -127,6 +127,7 @@ import { Product } from "../../models/product.model";
     `
       .create-product-container {
         max-width: 600px;
+        height: 100%;
         margin: 2rem auto;
         padding: 2rem;
         background: white;

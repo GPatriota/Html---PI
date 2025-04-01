@@ -8,11 +8,11 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="modal-overlay" *ngIf="isOpen">
       <div class="modal">
-        <h3>Confirm Deletion</h3>
-        <p>Are you sure you want to delete this product?</p>
+        <h3>Confirmar exclusão</h3>
+        <p>Você tem certeza que quer deletar esse produto?</p>
         <div class="button-group">
-          <button class="confirm-btn" (click)="confirm()">Yes</button>
-          <button class="cancel-btn" (click)="cancel()">No</button>
+          <button class="confirm-btn" (click)="confirm()">Sim</button>
+          <button class="cancel-btn" (click)="cancel()">Não</button>
         </div>
       </div>
     </div>
