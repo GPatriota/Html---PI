@@ -6,6 +6,7 @@ import { ProductService } from "../../services/product.service";
 import { AuthService } from "../../services/auth.service";
 import { Product } from "../../models/product.model";
 import { DeleteModalComponent } from "../../components/delete-modal/delete-modal.component";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-products",
@@ -19,12 +20,12 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
             type="text"
             [(ngModel)]="searchQuery"
             (input)="filterProducts()"
-            placeholder="Search products..."
+            placeholder="Pesquise produtos..."
             class="search-input"
           />
 
           <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
-          <option value="">All Sizes</option>
+          <option value="">Todos os tamanhos</option>
           <option value="34">34</option>
           <option value="35">35</option>
           <option value="36">36</option>
@@ -37,7 +38,7 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
         </select>
 
         <select [(ngModel)]="selectedPrice" (change)="filterProducts()" class="brand-select">
-          <option value="">All Prices</option>
+          <option value="">Todos os preços</option>
           <option value="0-150">0-150</option>
           <option value="150-300">150-300</option>
           <option value="300-450">300-450</option>
@@ -46,7 +47,7 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
         </select>
 
         <select [(ngModel)]="selectedGender" (change)="filterProducts()" class="brand-select">
-          <option value="">All Genders</option>
+          <option value="">Sexo</option>
           <option value="feminino">Feminino</option>
           <option value="masculino">Masculino</option>
           <option value="unissex">Unissex</option>
@@ -58,7 +59,7 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
             (change)="filterProducts()"
             class="brand-select"
           >
-            <option value="">All Brands</option>
+            <option value="">Todas as Marcas</option>
             <option value="Nike">Nike</option>
             <option value="Adidas">Adidas</option>
             <option value="Puma">Puma</option>
@@ -66,7 +67,7 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
         </div>
 
         <button *ngIf="isAdmin" class="add-btn" (click)="navigateToCreate()">
-          Add New
+          Criar novo produto
         </button>
       </div>
 
@@ -132,11 +133,11 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
         background-color: rgb(192, 192, 192); /* Cor de fundo dentro da borda */
       }
       .add-btn {
-        padding: 0.75rem 1.5rem;
-        background: #2c5282;
+        padding: 1.25rem 1.75rem;
+        background:rgb(0, 153, 255);
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 25px;
         cursor: pointer;
         font-weight: 500;
         display: flex;
@@ -218,7 +219,8 @@ export class ProductsComponent {
   constructor(
     private productService: ProductService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.filterProducts();
     this.authService.currentUser$.subscribe((user) => {
@@ -290,4 +292,12 @@ export class ProductsComponent {
     this.showDeleteModal = false;
     this.productToDelete = null;
   }
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['brand']) {
+        this.selectedBrand = params['brand'];
+        this.filterProducts();
+      }
+    });
+}
 }

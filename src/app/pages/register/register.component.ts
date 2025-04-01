@@ -11,17 +11,17 @@ import { AuthService } from '../../services/auth.service';
   template: `
     <div class="register-container">
       <form (ngSubmit)="onSubmit()" class="register-form">
-        <h2>Create Your Account</h2> 
+        <h2>Crie sua conta</h2> 
         
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Nome completo</label>
           <input
             type="text"
             id="username"
             [(ngModel)]="username"
             name="username"
             required
-            placeholder="Choose a username"
+            placeholder="Digite seu nome completo"
           />
         </div>
 
@@ -33,7 +33,7 @@ import { AuthService } from '../../services/auth.service';
             [(ngModel)]="email"
             name="email"
             required
-            placeholder="Enter your email"
+            placeholder="Digite seu email"
           />
         </div>
         
@@ -45,12 +45,12 @@ import { AuthService } from '../../services/auth.service';
             [(ngModel)]="cpf"
             name="cpf"
             required
-            placeholder="Enter your CPF"
+            placeholder="Digite seu CPF"
           />
         </div>
 
         <div class="form-group">
-          <label for="dob">Date of Birth</label>
+          <label for="dob">Data de nascimento</label>
           <input
             type="date"
             id="dob"
@@ -61,30 +61,30 @@ import { AuthService } from '../../services/auth.service';
         </div>
         
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Senha</label>
           <input
             type="password"
             id="password"
             [(ngModel)]="password"
             name="password"
             required
-            placeholder="Enter a password"
+            placeholder="Digite sua senha"
           />
         </div>
         
         <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
+          <label for="confirmPassword">Confirmação de senha</label>
           <input
             type="password"
             id="confirmPassword"
             [(ngModel)]="confirmPassword"
             name="confirmPassword"
             required
-            placeholder="Re-enter your password"
+            placeholder="Digite novamente sua senha"
           />
         </div>
         
-        <button type="submit">Register</button>
+        <button type="submit">Registrar</button>
         
         <p *ngIf="error" class="error">{{ error }}</p>
       </form>
