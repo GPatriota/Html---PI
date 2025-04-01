@@ -17,7 +17,7 @@ import { AuthService } from '../../services/auth.service';
           <a routerLink="/about">Sobre nós</a>
           <ng-container *ngIf="!(authService.currentUser$ | async)">
             <a routerLink="/login">Login</a>
-            <a routerLink="/register"></a>
+            <a routerLink="/register">Registro</a>
           </ng-container>
           <a *ngIf="authService.currentUser$ | async" (click)="logout()" style="cursor: pointer;">Logout</a>
         </div>
