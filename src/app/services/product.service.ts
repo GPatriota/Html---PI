@@ -54,7 +54,6 @@ export class ProductService {
   }
 
   getProductById(id: string): Product | null {
-    console.log(localStorage.getItem('products'));
     return this.products.find(p => p.id === id) || null;
   }
 
