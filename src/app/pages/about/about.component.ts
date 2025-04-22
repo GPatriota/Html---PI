@@ -5,8 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-  <div class="container">
-    <div class="Sobre nós">
+    <div class="about">
       <h1>Sobre nós</h1>
       <p> Uma empresa, dedicada a oferecer os melhores tênis do mercado, combinando design moderno, conforto e alta durabilidade.</p>
       <h3> Nossa História</h3>
@@ -18,11 +17,11 @@ import { Component } from '@angular/core';
         <p>Oferecer aos nossos clientes a melhor seleção de calçados, aliando estilo, conforto e qualidade a preços competitivos.</p>
       </div>
 
-      <div class="Visão">
+      <div class="vision">
       <h2>Visão</h2>
       <p> Uma mentalidade focada no coletivo, impulsionada por uma cultura de inovação e um propósito unificado, dedicada a criar um impacto positivo e duradouro.</p>
       
-      <div class="Valores">
+      <div class="values">
         <h2>Nossos valores</h2>
         <ul>
           <li>Qualidade em primeiro lugar</li>
@@ -32,15 +31,8 @@ import { Component } from '@angular/core';
         </ul>
       </div>
     </div>
-  </div>
   `,
   styles: [`
-
-    .container {
-        height: 100%;
-        max-width: 1000px;
-    }
-
     .about {
       max-width: 800px;
       margin: 0 auto;
