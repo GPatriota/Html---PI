@@ -37,7 +37,7 @@ import { Component } from '@angular/core';
   styles: [`
 
     .container {
-        heigh: 100%;
+        height: 100%;
         max-width: 1000px;
     }
 
