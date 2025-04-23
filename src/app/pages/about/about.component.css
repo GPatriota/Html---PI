@@ -1,0 +1,28 @@
+.about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    color: #2c5282;
+    margin-bottom: 1rem;
+  }
+  
+  .mission,
+  .values,
+  .vision {
+    margin-top: 2rem;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid #2c5282;
+  }
+  
