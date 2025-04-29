@@ -4,6 +4,7 @@ import { Component } from "@angular/core";
 import { HeaderComponent } from "./app/components/header/header.component";
 import { routes } from "./app/app.routes";
 import { FooterComponent } from "./app/components/footer/footer.component";
+import { appConfig } from "./app/app.config";
 
 @Component({
   selector: "app-root",
@@ -19,6 +20,5 @@ import { FooterComponent } from "./app/components/footer/footer.component";
 })
 export class App {}
 
-bootstrapApplication(App, {
-  providers: [provideRouter(routes)],
-});
+bootstrapApplication(App, appConfig)
+  .catch((err) => console.error(err));
