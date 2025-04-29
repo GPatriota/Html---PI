@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"npx ng serve\" \"npx json-server backend/db/data.json\"",
     "build": "ng build"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "@angular-devkit/build-angular": "^17.0.0",
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
+    "concurrently": "^9.1.2",
     "typescript": "~5.2.2"
   }
 }
