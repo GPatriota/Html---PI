@@ -40,7 +40,6 @@ export class AuthService {
   register(username: string, email: string, cpf: string, birthDate: string, password: string, confirmPassword?: string): boolean {
     const users = this.getUsers();
     if (users.some(u => u.username === username || u.email === email || u.cpf === cpf)) {
-      console.log('fcsawwec')
       return false;
     }
     
