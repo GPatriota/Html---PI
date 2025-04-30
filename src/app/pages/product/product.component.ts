@@ -44,13 +44,14 @@ export class ProductComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       
       const productId = params.get('id');
+
       if (productId) {
-        const product = this.productService.getProductById(productId);
-        if (product) {
-          this.product = product;
-          return;
-        }
-        this.router.navigate(['']);
+        this.productService.getProductById(productId).subscribe(product => {
+          if (product) {
+            this.product = product
+            return
+          }
+        })
       } else {
         this.router.navigate(['']);
       }

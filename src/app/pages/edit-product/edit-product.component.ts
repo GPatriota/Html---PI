@@ -19,23 +19,24 @@ export class EditProductComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    const product = this.productService.getProductById(id);
-    console.log(product);
-    if (product) {
-      this.product = { ...product };
-    } else {
-      this.router.navigate(['/products']);
-    }
+    this.productService.getProductById(id).subscribe(product => {
+      if (product) {
+        this.product = { ...product };
+      } else {
+        this.router.navigate(['/products']);
+      }
+    });
   }
 
   onSubmit(form: NgForm) {
     if (form.valid && this.product) {
-      this.productService.updateProduct(this.product);
-      this.router.navigate(['/products']);
+      this.productService.updateProduct(this.product).subscribe(() => {
+        this.router.navigate(['/products']);
+      });
     }
   }
 

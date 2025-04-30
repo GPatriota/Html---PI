@@ -24,12 +24,13 @@ export class ProductsComponent {
   isAdmin = false;
   showDeleteModal = false;
   productToDelete: string | null = null;
+  products: Product[] = []
 
   constructor(
     private productService: ProductService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.filterProducts();
     this.authService.currentUser$.subscribe((user) => {
@@ -38,37 +39,39 @@ export class ProductsComponent {
   }
 
   filterProducts() {
-    let products = this.productService.getProducts();
+    this.productService.getProducts().subscribe(products => {
+      this.products = products
 
-    if (this.searchQuery) {
-      products = products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          product.gender.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    }
-
-    if (this.selectedBrand) {
-      products = products.filter(
-        (product) => product.brand === this.selectedBrand
-      );
-    }
-
-    if (this.selectedGender) {
-      products = products.filter(
-        (product) => product.gender === this.selectedGender
-      );
-    }
-
-    if (this.selectedPrice) {
-      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); 
-      products = products.filter(product => 
-        product.price >= minPrice && product.price <= maxPrice
-      );
-    }
-
-    this.filteredProducts = products;
+      if (this.searchQuery) {
+        this.products = this.products.filter(
+          (product) =>
+            product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+            product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+            product.gender.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+  
+      if (this.selectedBrand) {
+        this.products = this.products.filter(
+          (product) => product.brand === this.selectedBrand
+        );
+      }
+  
+      if (this.selectedGender) {
+        this.products = this.products.filter(
+          (product) => product.gender === this.selectedGender
+        );
+      }
+  
+      if (this.selectedPrice) {
+        const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); 
+        this.products = this.products.filter(product => 
+          product.price >= minPrice && product.price <= maxPrice
+        );
+      }
+  
+      this.filteredProducts = this.products;
+    });
   }
 
   navigateToCreate() {
@@ -86,8 +89,9 @@ export class ProductsComponent {
 
   confirmDelete() {
     if (this.productToDelete) {
-      this.productService.deleteProduct(this.productToDelete);
-      this.filterProducts();
+      this.productService.deleteProduct(this.productToDelete).subscribe(() => {
+        this.filterProducts();
+      });
     }
     this.showDeleteModal = false;
     this.productToDelete = null;
@@ -102,8 +106,8 @@ export class ProductsComponent {
     this.route.queryParams.subscribe(params => {
       if (params['brand']) {
         this.selectedBrand = params['brand'];
-        this.filterProducts();
       }
+      this.filterProducts();
     });
   }
 }
