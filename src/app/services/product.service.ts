@@ -20,7 +20,6 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product> {
-    console.log("addProduct", product);
     return this.http.post<Product>(this.API, product);
   }
 
