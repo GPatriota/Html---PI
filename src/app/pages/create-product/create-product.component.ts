@@ -10,7 +10,7 @@ import { CommonModule } from "@angular/common";
   standalone: true,
   templateUrl: "./create-product.component.html",
   styleUrls: ["./create-product.component.css"],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule],
 })
 export class CreateProductComponent {
   @ViewChild("productForm") productForm!: NgForm;
@@ -35,8 +35,10 @@ export class CreateProductComponent {
 
     if (this.productForm.valid) {
       this.product.id = Date.now().toString();
-      this.productService.addProduct({ ...this.product });
-      this.router.navigate(["/products"]);
+      this.productService.addProduct({ ...this.product }).subscribe({
+        next: () => this.router.navigate(["/products"]),
+        error: (err) => console.error("Erro ao criar produto:", err),
+      });
     }
   }
 
