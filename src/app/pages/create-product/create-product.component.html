@@ -25,6 +25,7 @@
           [(ngModel)]="product.price"
           name="price"
           required
+          min="0"
           #price="ngModel"
           [ngClass]="{'error': price.invalid && (price.touched || isSubmitted)}"
         />
