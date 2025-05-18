@@ -59,4 +59,8 @@ export class AuthService {
     const users = localStorage.getItem('users');
     return users ? JSON.parse(users) : [];
   }
+
+  isLogged(): boolean {
+  return this.currentUserSubject.value !== null;
+}
 }

@@ -24,6 +24,7 @@
           id="price"
           [(ngModel)]="product.price"
           name="price"
+          min="0"
           required
           #price="ngModel"
           [class.invalid]="price.touched && price.invalid"

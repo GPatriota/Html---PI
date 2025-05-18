@@ -5,6 +5,7 @@
         <a routerLink="/">Página Inicial</a>
         <a routerLink="/products">Produtos</a>
         <a routerLink="/about">Sobre nós</a>
+        <a routerLink="/in-developing">Carrinho</a>
         <ng-container *ngIf="!(authService.currentUser$ | async)">
           <a routerLink="/login">Login</a>
           <a routerLink="/register">Registro</a>
