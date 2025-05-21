@@ -9,6 +9,7 @@ export class ProductService {
   private products: Product[] = [
     {
       id: '1',
+      size: [40],
       name: 'Air Max 270',
       price: 199.99,
       brand: 'Nike',
@@ -18,6 +19,7 @@ export class ProductService {
     },
     {
       id: '2',
+      size: [42],
       name: 'Ultraboost',
       price: 179.99,
       brand: 'Adidas',
@@ -27,6 +29,7 @@ export class ProductService {
     },
     {
       id: '3',
+      size: [41],
       name: 'RS-X',
       price: 129.99,
       brand: 'Puma',

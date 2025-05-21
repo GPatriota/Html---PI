@@ -23,18 +23,14 @@ import { DeleteModalComponent } from "../../components/delete-modal/delete-modal
             class="search-input"
           />
 
-          <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
-          <option value="">All Sizes</option>
-          <option value="34">34</option>
-          <option value="35">35</option>
-          <option value="36">36</option>
-          <option value="37">37</option>
-          <option value="38">38</option>
-          <option value="39">39</option>
-          <option value="40">40</option>
-          <option value="41">41</option>
-          <option value="42">42</option>
-        </select>
+        <select [(ngModel)]="selectedSize" (change)="filterProducts()" class="brand-select">
+          <option [ngValue]="null">Todos os tamanhos</option>
+          <option [ngValue]="38">38</option>
+          <option [ngValue]="39">39</option>
+          <option [ngValue]="40">40</option>
+          <option [ngValue]="41">41</option>
+          <option [ngValue]="42">42</option>
+         </select>
 
         <select [(ngModel)]="selectedPrice" (change)="filterProducts()" class="brand-select">
           <option value="">All Prices</option>
@@ -210,6 +206,7 @@ export class ProductsComponent {
   selectedBrand = "";
   selectedGender = "";
   selectedPrice = "";
+  selectedSize: number | null = null;
   filteredProducts: Product[] = [];
   isAdmin = false;
   showDeleteModal = false;
@@ -253,13 +250,20 @@ export class ProductsComponent {
     }
 
     if (this.selectedPrice) {
-      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); // Dividindo o intervalo de preço
+      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); 
   
       products = products.filter(product => 
         product.price >= minPrice && product.price <= maxPrice
       );
     }
 
+   if (this.selectedSize !== null) {
+  const sizeFiltro = this.selectedSize;
+  products = products.filter(product => {
+    const sizes = Array.isArray(product.size) ? product.size : [product.size];
+    return sizes.includes(sizeFiltro);
+  });
+}
 
     this.filteredProducts = products;
   }

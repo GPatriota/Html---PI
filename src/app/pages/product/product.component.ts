@@ -241,6 +241,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductComponent implements OnInit {
   product: Product = {
     id: '',
+    size: [0],
     name: '',
     price: 0,
     brand: '',
@@ -267,6 +268,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.activatedRoute.paramMap.subscribe(params => {
       
       const productId = params.get('id');

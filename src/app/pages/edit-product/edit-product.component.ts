@@ -59,6 +59,24 @@ import { Product } from '../../models/product.model';
         </div>
 
         <div class="form-group">
+          <label>Tamanhos Disponíveis</label>
+          <div class="size-options">
+            <label *ngFor="let size of tamanhosDisponiveis">
+              <input
+                type="checkbox"
+                [value]="size"
+                (change)="toggleSize(size)"
+                [checked]="product?.size.includes(size)"
+              />
+              {{ size }}
+            </label>
+          </div>
+          <div *ngIf="isSubmitted && product?.size.length === 0" class="error-message">
+            Selecione pelo menos um tamanho.
+          </div>
+        </div>
+
+        <div class="form-group">
           <label for="description">Description</label>
           <textarea
             id="description"
@@ -191,6 +209,8 @@ import { Product } from '../../models/product.model';
 })
 export class EditProductComponent implements OnInit {
   product: Product | null = null;
+  tamanhosDisponiveis: number[] = [38, 39, 40, 41, 42];
+  isSubmitted = false;
 
   constructor(
     private productService: ProductService,
@@ -209,14 +229,26 @@ export class EditProductComponent implements OnInit {
     }
   }
 
-  onSubmit(form: NgForm) {
-    if (form.valid) {
-      if (this.product) {
-        this.productService.updateProduct(this.product);
-        this.router.navigate(['/products']);
-      }
+  toggleSize(size: number) {
+    if (!this.product) return; 
+
+    if (this.product.size.includes(size)) {
+      this.product.size = this.product.size.filter(s => s !== size);
+    } else {
+      this.product.size.push(size);
     }
   }
+
+  onSubmit(form: NgForm) {
+    this.isSubmitted = true;
+  // Só envia se o formulário for válido, o produto existir e houver pelo menos um tamanho selecionado
+  if (form.valid && this.product && this.product.size.length > 0) {
+    this.productService.updateProduct(this.product);
+    this.router.navigate(['/products']);
+  }
+}
+
+  
 
   cancel() {
     this.router.navigate(['/products']);

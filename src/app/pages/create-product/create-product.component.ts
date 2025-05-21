@@ -65,6 +65,20 @@ import { Product } from "../../models/product.model";
           </div>
         </div>
 
+                <div class="form-group">
+                <label>Tamanhos Disponíveis</label>
+                <div class="size-options">
+                  <label *ngFor="let size of tamanhosDisponiveis">
+                    <input type="checkbox" [value]="size" (change)="toggleSize(size)" [checked]="product.size.includes(size)" />
+                    {{ size }}
+                  </label>
+                </div>
+                <div *ngIf="isSubmitted && product.size.length === 0" class="error-message">
+                  Selecione pelo menos um tamanho.
+                </div>
+              </div>
+
+
         <div class="form-group">
           <label for="description">Description</label>
           <textarea
@@ -198,8 +212,11 @@ import { Product } from "../../models/product.model";
 })
 export class CreateProductComponent {
   @ViewChild("productForm") productForm!: NgForm;
+
+  tamanhosDisponiveis: number[] = [38, 39, 40, 41, 42];
   product: Product = {
     id: "",
+    size: [],
     name: "",
     price: 0,
     brand: "",
@@ -211,11 +228,19 @@ export class CreateProductComponent {
 
   constructor(private productService: ProductService, private router: Router) {}
 
+  toggleSize(size: number) {
+  if (this.product.size.includes(size)) {
+    this.product.size = this.product.size.filter(s => s !== size);
+  } else {
+    this.product.size.push(size);
+  }
+}
+
   onSubmit() {
     this.isSubmitted = true; // Set to true when the form is submitted
     this.productForm.form.markAllAsTouched(); // Mark all fields as touched to trigger error messages.
 
-    if (this.productForm.valid) {
+    if (this.productForm.valid && this.product.size.length > 0) {
       this.product.id = Date.now().toString();
       this.productService.addProduct({ ...this.product });
       this.router.navigate(["/products"]);
