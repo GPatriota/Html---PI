@@ -14,7 +14,7 @@ import { CommonModule } from "@angular/common";
 })
 export class EditProductComponent implements OnInit {
   product: Product | null = null;
-  tamanhosDisponiveis: number[] = [38, 39, 40, 41, 42];
+  disponibleSizes: number[] = [38, 39, 40, 41, 42];
   isSubmitted = false;
 
   constructor(

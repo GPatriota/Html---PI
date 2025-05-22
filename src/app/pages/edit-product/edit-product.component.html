@@ -49,12 +49,12 @@
         <div class="form-group">
           <label>Tamanhos Disponíveis</label>
           <div class="size-options">
-            <label *ngFor="let size of tamanhosDisponiveis">
+            <label *ngFor="let size of disponibleSizes">
               <input
                 type="checkbox"
                 [value]="size"
                 (change)="toggleSize(size)"
-                [checked]="product?.size?.includes(size)"
+                [checked]="product.size.includes(size)"
               />
               {{ size }}
             </label>
