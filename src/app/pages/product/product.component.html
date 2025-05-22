@@ -16,7 +16,7 @@
           <p class="product-description">{{ product.description }}</p>
   
           <div class="price-box">
-            <h2 class="product-price">R$ {{ product.price | number:'1.2-2' }}</h2>
+            <h2 class="product-price">R$ {{ quantity*product.price | number:'1.2-2' }}</h2>
             <span class="installments">ou em até 10x sem juros</span>
           </div>
   
