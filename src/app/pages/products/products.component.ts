@@ -20,6 +20,7 @@ export class ProductsComponent {
   selectedBrand = "";
   selectedGender = "";
   selectedPrice = "";
+  selectedSize: number | null = null;
   filteredProducts: Product[] = [];
   isAdmin = false;
   showDeleteModal = false;
@@ -42,38 +43,48 @@ export class ProductsComponent {
     this.productService.getProducts().subscribe(products => {
       this.products = products
 
-      if (this.searchQuery) {
-        this.products = this.products.filter(
-          (product) =>
-            product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-            product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-            product.gender.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      }
-  
-      if (this.selectedBrand) {
-        this.products = this.products.filter(
-          (product) => product.brand === this.selectedBrand
-        );
-      }
-  
-      if (this.selectedGender) {
-        this.products = this.products.filter(
-          (product) => product.gender === this.selectedGender
-        );
-      }
-  
-      if (this.selectedPrice) {
-        const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); 
-        this.products = this.products.filter(product => 
-          product.price >= minPrice && product.price <= maxPrice
-        );
-      }
-  
-      this.filteredProducts = this.products;
-    });
-  }
+    if (this.searchQuery) {
+      products = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.gender.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
 
+
+
+    if (this.selectedBrand) {
+      products = products.filter(
+        (product) => product.brand === this.selectedBrand
+      );
+    }
+
+    if (this.selectedGender) {
+      products = products.filter(
+        (product) => product.gender === this.selectedGender
+      );
+    }
+
+    if (this.selectedPrice) {
+      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); 
+  
+      products = products.filter(product => 
+        product.price >= minPrice && product.price <= maxPrice
+      );
+    }
+
+   if (this.selectedSize !== null) {
+  const sizeFiltro = this.selectedSize;
+  products = products.filter(product => {
+    const sizes = Array.isArray(product.size) ? product.size : [product.size];
+    return sizes.includes(sizeFiltro);
+  });
+}
+
+    this.filteredProducts = products;
+  }
+)};
   navigateToCreate() {
     this.router.navigate(["/create-product"]);
   }
