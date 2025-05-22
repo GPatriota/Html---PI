@@ -1,102 +1,118 @@
-<div class="edit-product-container">
-    <h2>Editando produto</h2>
-    <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="product-form" *ngIf="product">
-      <div class="form-group">
-        <label for="name">Nome</label>
-        <input
-          type="text"
-          id="name"
-          [(ngModel)]="product.name"
-          name="name"
-          required
-          #name="ngModel"
-          [class.invalid]="name.touched && name.invalid"
-        />
-        <div *ngIf="name.touched && name.invalid" class="error-message">
-          Nome é obrigatório
+ <div class="edit-product-container">
+      <h2>Edit Product</h2>
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="product-form" *ngIf="product">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="product.name"
+            name="name"
+            required
+            #name="ngModel"
+            [class.invalid]="name.touched && name.invalid"
+          />
+          <div *ngIf="name.touched && name.invalid" class="error-message">
+            Name is required.
+          </div>
         </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="price">Preço</label>
-        <input
-          type="number"
-          id="price"
-          [(ngModel)]="product.price"
-          name="price"
-          min="0"
-          required
-          #price="ngModel"
-          [class.invalid]="price.touched && price.invalid"
-        />
-        <div *ngIf="price.touched && price.invalid" class="error-message">
-          Preço é obrigatório
+
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            [(ngModel)]="product.price"
+            name="price"
+            required
+            #price="ngModel"
+            [class.invalid]="price.touched && price.invalid"
+          />
+          <div *ngIf="price.touched && price.invalid" class="error-message">
+            Price is required.
+          </div>
         </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="brand">Marca</label>
-        <select id="brand" [(ngModel)]="product.brand" name="brand" required #brand="ngModel" [class.invalid]="brand.touched && brand.invalid">
-          <option value="">Selecione uma marca</option>
-          <option value="Nike">Nike</option>
-          <option value="Puma">Puma</option>
-          <option value="Adidas">Adidas</option>
-        </select>
-        <div *ngIf="brand.touched && brand.invalid" class="error-message">
-          Marca é obrigatório
+
+        <div class="form-group">
+          <label for="brand">Brand</label>
+          <select id="brand" [(ngModel)]="product.brand" name="brand" required #brand="ngModel" [class.invalid]="brand.touched && brand.invalid">
+            <option value="">Select Brand</option>
+            <option value="Nike">Nike</option>
+            <option value="Puma">Puma</option>
+            <option value="Adidas">Adidas</option>
+          </select>
+          <div *ngIf="brand.touched && brand.invalid" class="error-message">
+            Brand is required.
+          </div>
         </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="description">Descrição</label>
-        <textarea
-          id="description"
-          [(ngModel)]="product.description"
-          name="description"
-          rows="4"
-        ></textarea>
-      </div>
-  
-      <div class="form-group">
-        <label for="gender">Sexo</label>
-        <select
-          id="gender"
-          [(ngModel)]="product.gender"
-          name="gender"
-          required
-          #gender="ngModel"
-          [class.invalid]="gender.touched && gender.invalid"
-        >
-          <option value="">Selecione um sexo</option>
-          <option value="masculino">Masculino</option>
-          <option value="feminino">Feminino</option>
-          <option value="unissex">Unissex</option>
-        </select>
-        <div *ngIf="gender.touched && gender.invalid" class="error-message">
-          Sexo é obrigatório
+
+        <div class="form-group">
+          <label>Tamanhos Disponíveis</label>
+          <div class="size-options">
+            <label *ngFor="let size of tamanhosDisponiveis">
+              <input
+                type="checkbox"
+                [value]="size"
+                (change)="toggleSize(size)"
+                [checked]="product?.size?.includes(size)"
+              />
+              {{ size }}
+            </label>
+          </div>
+          <div *ngIf="isSubmitted && product?.size?.length === 0" class="error-message">
+            Selecione pelo menos um tamanho.
+          </div>
         </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input
-          type="text"
-          id="imageUrl"
-          [(ngModel)]="product.imageUrl"
-          name="imageUrl"
-          required
-          #imageUrl="ngModel"
-          [class.invalid]="imageUrl.touched && imageUrl.invalid"
-        />
-        <div *ngIf="imageUrl.touched && imageUrl.invalid" class="error-message">
-          Url da imagem é obrigatório
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            [(ngModel)]="product.description"
+            name="description"
+            rows="4"
+          ></textarea>
         </div>
-      </div>
-  
-      <div class="button-group">
-        <button type="submit" class="submit-btn" [disabled]="form.invalid">Salvar alterações</button>
-        <button type="button" class="cancel-btn" (click)="cancel()">Cancelar</button>
-      </div>
-    </form>
-  </div>
-  
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select
+            id="gender"
+            [(ngModel)]="product.gender"
+            name="gender"
+            required
+            #gender="ngModel"
+            [class.invalid]="gender.touched && gender.invalid"
+          >
+            <option value="">Select Gender</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="unissex">Unissex</option>
+          </select>
+          <div *ngIf="gender.touched && gender.invalid" class="error-message">
+            Gender is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="imageUrl">Image URL</label>
+          <input
+            type="text"
+            id="imageUrl"
+            [(ngModel)]="product.imageUrl"
+            name="imageUrl"
+            required
+            #imageUrl="ngModel"
+            [class.invalid]="imageUrl.touched && imageUrl.invalid"
+          />
+          <div *ngIf="imageUrl.touched && imageUrl.invalid" class="error-message">
+            Image URL is required.
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="submit-btn" [disabled]="form.invalid">Save Changes</button>
+          <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
