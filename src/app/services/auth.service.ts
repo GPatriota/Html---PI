@@ -28,6 +28,7 @@ export class AuthService {
     const user = users.find(u => u.username === username && u.password === password);
     
     if (user) {
+      console.log('teste');
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
       return true;
@@ -42,9 +43,6 @@ export class AuthService {
       return false;
     }
     
-    if (password !== confirmPassword) {
-      return false;
-    }
 
     const newUser: User = { username, email, cpf, birthDate, password, isAdmin: false };
     users.push(newUser);
@@ -61,4 +59,8 @@ export class AuthService {
     const users = localStorage.getItem('users');
     return users ? JSON.parse(users) : [];
   }
+
+  isLogged(): boolean {
+  return this.currentUserSubject.value !== null;
+}
 }

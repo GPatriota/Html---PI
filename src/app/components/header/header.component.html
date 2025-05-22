@@ -1,0 +1,17 @@
+<header class="header">
+    <nav>
+      <a routerLink="/" class="logo">ShoeStore</a>
+      <div class="nav-links">
+        <a routerLink="/">Página Inicial</a>
+        <a routerLink="/products">Produtos</a>
+        <a routerLink="/about">Sobre nós</a>
+        <a routerLink="/in-developing">Carrinho</a>
+        <ng-container *ngIf="!(authService.currentUser$ | async)">
+          <a routerLink="/login">Login</a>
+          <a routerLink="/register">Registro</a>
+        </ng-container>
+        <a *ngIf="authService.currentUser$ | async" (click)="logout()" style="cursor: pointer;">Logout</a>
+      </div>
+    </nav>
+  </header>
+  

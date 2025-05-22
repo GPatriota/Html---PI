@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Air Max 270",
+      "price": 199.99,
+      "brand": "Nike",
+      "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&h=300&q=80",
+      "description": "Classic Nike sneaker with air cushioning",
+      "gender": "unissex"
+    },
+    {
+      "id": "2",
+      "name": "Ultraboost",
+      "price": 12,
+      "brand": "Adidas",
+      "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
+      "description": "Premium running shoe with boost technology",
+      "gender": "masculino"
+    },
+    {
+      "id": "3",
+      "name": "RS-X",
+      "price": 129.99,
+      "brand": "Puma",
+      "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
+      "description": "Retro-inspired sneaker with modern comfort",
+      "gender": "feminino"
+    }
+  ]
+}

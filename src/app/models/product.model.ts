@@ -7,4 +7,5 @@ export interface Product {
   imageUrl: string;
   description: string; 
   gender: 'masculino' | 'feminino' | 'unissex'; 
+  size?: number[];
 }

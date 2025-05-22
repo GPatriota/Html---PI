@@ -1,0 +1,11 @@
+<div class="modal-overlay" *ngIf="isOpen">
+    <div class="modal">
+      <h3>Confirmar exclusão</h3>
+      <p>Você tem certeza que quer deletar esse produto?</p>
+      <div class="button-group">
+        <button class="confirm-btn" (click)="confirm()">Sim</button>
+        <button class="cancel-btn" (click)="cancel()">Não</button>
+      </div>
+    </div>
+  </div>
+  
