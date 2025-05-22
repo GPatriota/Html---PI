@@ -15,8 +15,10 @@ import { CommonModule } from "@angular/common";
 export class CreateProductComponent {
   @ViewChild("productForm") productForm!: NgForm;
 
+  disponibleSizes: number[] = [38, 39, 40, 41, 42];
   product: Product = {
     id: "",
+    size: [],
     name: "",
     price: 0,
     brand: "",
@@ -29,11 +31,19 @@ export class CreateProductComponent {
 
   constructor(private productService: ProductService, private router: Router) {}
 
+  toggleSize(size: number) {
+  if (this.product.size.includes(size)) {
+    this.product.size = this.product.size.filter(s => s !== size);
+  } else {
+    this.product.size.push(size);
+  }
+}
+
   onSubmit() {
     this.isSubmitted = true;
     this.productForm.form.markAllAsTouched();
 
-    if (this.productForm.valid) {
+    if (this.productForm.valid && this.product.size.length > 0) {
       this.product.id = Date.now().toString();
       this.productService.addProduct({ ...this.product }).subscribe({
         next: () => this.router.navigate(["/products"]),
