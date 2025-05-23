@@ -26,6 +26,33 @@
       "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
       "description": "Retro-inspired sneaker with modern comfort",
       "gender": "feminino"
+    },
+    {
+      "id": "1747861041130",
+      "name": "Tênis Knu Skool Stack Black",
+      "price": 900,
+      "brand": "Vans",
+      "imageUrl": "https://secure-static.vans.com.br/medias/sys_master/vans/vans/h52/h59/h00/h00/12102555861022/1002003090001U-01-BASEIMAGE-Hires.jpg",
+      "description": "Teste",
+      "gender": "unissex"
+    },
+    {
+      "id": "1747868952085",
+      "name": "Tênis Olympikus Diffuse 5 - Preto",
+      "price": 1000,
+      "brand": "Olympikus",
+      "imageUrl": "https://cdn.bnws3.com.br/b2online.com.br/image/cache/data/produtos/olympikus/masculino/tenis-olympikus-diffuse-5-masculino-preto---dourado-8851-23-08-23-485x485.jpg",
+      "description": "Tênis Olympikus Diffuse 5 Masculino Este é um produto original Olympikus com garantia vendido pela ShoeStore.",
+      "gender": "unissex"
+    },
+    {
+      "id": "1747869019300",
+      "name": "Tênis Olympikus Reflect",
+      "price": 249.9,
+      "brand": "Olympikus",
+      "imageUrl": "https://vulcabras.vtexassets.com/arquivos/ids/287991-1600-1600?v=638781882181700000&width=1600&height=1600&aspect=true",
+      "description": "O Olympikus Reflect é o tênis ideal para quem busca estilo no seu dia a dia. O seu solado é desenvolvido em tecnologia de amortecimento Evasense, em um único bloco de EVA que proporciona leveza, maciez e flexibilidade nas passadas.",
+      "gender": "masculino"
     }
   ]
 }

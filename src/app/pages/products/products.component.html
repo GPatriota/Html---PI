@@ -39,9 +39,7 @@
   
         <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
           <option value="">Todas as Marcas</option>
-          <option value="Nike">Nike</option>
-          <option value="Adidas">Adidas</option>
-          <option value="Puma">Puma</option>
+          <option *ngFor="let brand of availableBrands" [value]="brand">{{ brand }}</option>
         </select>
       </div>
   

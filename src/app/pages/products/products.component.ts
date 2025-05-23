@@ -7,6 +7,7 @@ import { AuthService } from "../../services/auth.service";
 import { Product } from "../../models/product.model";
 import { DeleteModalComponent } from "../../components/delete-modal/delete-modal.component";
 import { ActivatedRoute } from '@angular/router';
+import { BrandService } from "../../services/brand.service";
 
 @Component({
   selector: "app-products",
@@ -25,12 +26,14 @@ export class ProductsComponent {
   showDeleteModal = false;
   productToDelete: string | null = null;
   products: Product[] = []
+  availableBrands: string[] = [];
 
   constructor(
     private productService: ProductService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
+    private brandService: BrandService
   ) {
     this.filterProducts();
     this.authService.currentUser$.subscribe((user) => {
@@ -103,6 +106,11 @@ export class ProductsComponent {
   }
 
   ngOnInit() {
+
+    this.brandService.availableBrands$.subscribe(brands => {
+      this.availableBrands = brands;
+    });
+
     this.route.queryParams.subscribe(params => {
       if (params['brand']) {
         this.selectedBrand = params['brand'];
