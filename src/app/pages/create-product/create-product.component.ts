@@ -16,8 +16,10 @@ import { BrandService } from "../../services/brand.service";
 export class CreateProductComponent {
   @ViewChild("productForm") productForm!: NgForm;
 
+  disponibleSizes: number[] = [38, 39, 40, 41, 42];
   product: Product = {
     id: "",
+    size: [],
     name: "",
     price: 0,
     brand: "",
@@ -53,6 +55,14 @@ export class CreateProductComponent {
       this.newBrand = "";
     }
   }
+
+  toggleSize(size: number) {
+  if (this.product.size.includes(size)) {
+    this.product.size = this.product.size.filter(s => s !== size);
+  } else {
+    this.product.size.push(size);
+  }
+}
 
   onSubmit() {
     this.isSubmitted = true;

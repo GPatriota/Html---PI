@@ -15,6 +15,7 @@ import { BrandService } from "../../services/brand.service";
 })
 export class EditProductComponent implements OnInit {
   product: Product | null = null;
+  disponibleSizes: number[] = [38, 39, 40, 41, 42];
 
   showNewBrandInput = false;
   newBrand = "";

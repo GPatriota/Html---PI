@@ -2,6 +2,9 @@
   "products": [
     {
       "id": "1",
+      "size": [
+        41
+      ],
       "name": "Air Max 270",
       "price": 199.99,
       "brand": "Nike",
@@ -11,6 +14,9 @@
     },
     {
       "id": "2",
+      "size": [
+        41
+      ],
       "name": "Ultraboost",
       "price": 12,
       "brand": "Adidas",
@@ -21,6 +27,9 @@
     {
       "id": "3",
       "name": "RS-X",
+      "size": [
+        41
+      ],
       "price": 129.99,
       "brand": "Puma",
       "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
@@ -28,31 +37,17 @@
       "gender": "feminino"
     },
     {
-      "id": "1747861041130",
-      "name": "Tênis Knu Skool Stack Black",
-      "price": 900,
-      "brand": "Vans",
-      "imageUrl": "https://secure-static.vans.com.br/medias/sys_master/vans/vans/h52/h59/h00/h00/12102555861022/1002003090001U-01-BASEIMAGE-Hires.jpg",
+      "id": "1747883627560",
+      "size": [
+        41,
+        42
+      ],
+      "name": "Gustavo Patriota",
+      "price": 22,
+      "brand": "Puma",
+      "imageUrl": "https://imgnike-a.akamaihd.net/360x360/02702751A10.jpg",
       "description": "Teste",
       "gender": "unissex"
-    },
-    {
-      "id": "1747868952085",
-      "name": "Tênis Olympikus Diffuse 5 - Preto",
-      "price": 1000,
-      "brand": "Olympikus",
-      "imageUrl": "https://cdn.bnws3.com.br/b2online.com.br/image/cache/data/produtos/olympikus/masculino/tenis-olympikus-diffuse-5-masculino-preto---dourado-8851-23-08-23-485x485.jpg",
-      "description": "Tênis Olympikus Diffuse 5 Masculino Este é um produto original Olympikus com garantia vendido pela ShoeStore.",
-      "gender": "unissex"
-    },
-    {
-      "id": "1747869019300",
-      "name": "Tênis Olympikus Reflect",
-      "price": 249.9,
-      "brand": "Olympikus",
-      "imageUrl": "https://vulcabras.vtexassets.com/arquivos/ids/287991-1600-1600?v=638781882181700000&width=1600&height=1600&aspect=true",
-      "description": "O Olympikus Reflect é o tênis ideal para quem busca estilo no seu dia a dia. O seu solado é desenvolvido em tecnologia de amortecimento Evasense, em um único bloco de EVA que proporciona leveza, maciez e flexibilidade nas passadas.",
-      "gender": "masculino"
     }
   ]
 }

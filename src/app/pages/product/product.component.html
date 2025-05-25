@@ -1,27 +1,38 @@
 <div class="product-page">
-    <img class="image" [src]="product.imageUrl" alt="Product Image">
     <div class="product-container">
-        <h1 class="product-title">{{product.name}}</h1>
-        
-        <div class="stats">
-            <span>Id: <b>{{product.id}}</b></span>
-            <span>Marca: <b>{{product.brand}}</b></span>
-            <span>Sexo: <b>{{product.gender}}</b></span>
+        <div class="image-section">
+          <img class="image" [src]="product.imageUrl" alt="{{ product.name }}">
         </div>
-        
-        <p class="product-description">{{product.description}}</p>
-        
-        <h2 class="product-price">{{"R$" + product.price}}</h2>
-
-        <div class="product-buttons">
+  
+        <div class="details-section">
+          <h1 class="product-title">{{ product.name }}</h1>
+  
+          <div class="stats">
+            <p><strong>ID:</strong> {{ product.id }}</p>
+            <p><strong>Marca:</strong> {{ product.brand }}</p>
+            <p><strong>Gênero:</strong> {{ product.gender }}</p>
+          </div>
+  
+          <p class="product-description">{{ product.description }}</p>
+  
+          <div class="price-box">
+            <h2 class="product-price">R$ {{ quantity*product.price | number:'1.2-2' }}</h2>
+            <span class="installments">ou em até 10x sem juros</span>
+          </div>
+  
+          <hr />
+  
+          <div class="product-buttons">
             <div class="quantity-selector">
-                <button class="btn minus" (click)="decrement()">−</button>
-                <span class="quantity">{{quantity}}</span>
-                <button class="btn plus" (click)="increment()">+</button>
+              <button class="btn minus" (click)="decrement()">−</button>
+              <span class="quantity">{{ quantity }}</span>
+              <button class="btn plus" (click)="increment()">+</button>
             </div>
-
+  
             <button class="add-to-cart" (click)="goToInDeveloping()">Adicionar ao carrinho</button>
             <button class="buy-now" (click)="goToInDeveloping()">Comprar agora</button>
+          </div>
         </div>
     </div>
-</div>
+  </div>
+  

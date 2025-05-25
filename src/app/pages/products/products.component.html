@@ -1,40 +1,38 @@
-<div class="products-page">
-    <div class="header">
-      <div class="filters">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          (input)="filterProducts()"
-          placeholder="Pesquise produtos..."
-          class="search-input"
-        />
-  
-        <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
-          <option value="">Todos os tamanhos</option>
-          <option value="34">34</option>
-          <option value="35">35</option>
-          <option value="36">36</option>
-          <option value="37">37</option>
-          <option value="38">38</option>
-          <option value="39">39</option>
-          <option value="40">40</option>
-          <option value="41">41</option>
-          <option value="42">42</option>
-        </select>
-  
+  <div class="products-page">
+      <div class="header">
+        <div class="filters">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="filterProducts()"
+            placeholder="Search products..."
+            class="search-input"
+          />
+
+        <select [(ngModel)]="selectedSize" (change)="filterProducts()" class="brand-select">
+          <option [ngValue]="null">Todos os tamanhos</option>
+          <option [ngValue]="38">38</option>
+          <option [ngValue]="39">39</option>
+          <option [ngValue]="40">40</option>
+          <option [ngValue]="41">41</option>
+          <option [ngValue]="42">42</option>
+         </select>
+
         <select [(ngModel)]="selectedPrice" (change)="filterProducts()" class="brand-select">
-          <option value="">Todos os preços</option>
+          <option value="">All Prices</option>
           <option value="0-150">0-150</option>
           <option value="150-300">150-300</option>
           <option value="300-450">300-450</option>
           <option value="450-600">450-600</option>
+
         </select>
-  
+
         <select [(ngModel)]="selectedGender" (change)="filterProducts()" class="brand-select">
-          <option value="">Sexo</option>
+          <option value="">All Genders</option>
           <option value="feminino">Feminino</option>
           <option value="masculino">Masculino</option>
           <option value="unissex">Unissex</option>
+
         </select>
   
         <select [(ngModel)]="selectedBrand" (change)="filterProducts()" class="brand-select">
@@ -58,19 +56,35 @@
             🗑️
           </button>
         </div>
-        <a [routerLink]="['/product', product.id]">
-          <img [src]="product.imageUrl" [alt]="product.name" />
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.brand }}</p>
-          <p class="price">{{ product.price | number:'1.2-2' }}</p>
-        </a>
+
+        <button *ngIf="isAdmin" class="add-btn" (click)="navigateToCreate()">
+          Add New
+        </button>
       </div>
-    </div>
-  
+
+      <div class="products-grid">
+        <div *ngFor="let product of filteredProducts" class="product-card">
+          <div class="admin-controls" *ngIf="isAdmin">
+            <button class="edit-btn" (click)="editProduct(product.id)">
+              ✏️
+            </button>
+            <button class="delete-btn" (click)="openDeleteModal(product.id)">
+              🗑️
+            </button>
+          </div>
+           <a [routerLink]="['/product', product.id]">
+            <img [src]="product.imageUrl" [alt]="product.name" />
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.brand }}</p>
+            <p class="price">{{ product.price | number:'1.2-2' }}</p>
+          </a>
+        </div>
+      </div>
+    
+
     <app-delete-modal
       [isOpen]="showDeleteModal"
       (onConfirm)="confirmDelete()"
       (onCancel)="cancelDelete()"
     ></app-delete-modal>
-  </div>
-  
+    </div>
