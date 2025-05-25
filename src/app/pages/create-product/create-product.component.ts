@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../models/product.model";
 import { CommonModule } from "@angular/common";
+import { BrandService } from "../../services/brand.service";
 
 @Component({
   selector: "app-create-product",
@@ -27,9 +28,33 @@ export class CreateProductComponent {
     gender: "unissex",
   };
 
+  showNewBrandInput = false;
+  newBrand = "";
+  availableBrands: string[] = [];
+
   isSubmitted = false;
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private brandService: BrandService
+  ) {}
+
+  ngOnInit() {
+    this.brandService.availableBrands$.subscribe((brands) => {
+      this.availableBrands = brands;
+    });
+  }
+
+  onBrandChange(value: string): void {
+    if (value === "Nova") {
+      this.showNewBrandInput = true;
+      this.product.brand = "";
+    } else {
+      this.showNewBrandInput = false;
+      this.newBrand = "";
+    }
+  }
 
   toggleSize(size: number) {
   if (this.product.size.includes(size)) {
@@ -43,7 +68,12 @@ export class CreateProductComponent {
     this.isSubmitted = true;
     this.productForm.form.markAllAsTouched();
 
-    if (this.productForm.valid && this.product.size.length > 0) {
+    if (this.showNewBrandInput && this.newBrand.trim()) {
+      this.brandService.addBrand(this.newBrand.trim());
+      this.product.brand = this.newBrand.trim();
+    }
+
+    if (this.productForm.valid) {
       this.product.id = Date.now().toString();
       this.productService.addProduct({ ...this.product }).subscribe({
         next: () => this.router.navigate(["/products"]),
@@ -55,7 +85,7 @@ export class CreateProductComponent {
     }
   }
 
-  cancel() {
+    cancel() {
     this.router.navigate(["/products"]);
   }
 }
