@@ -10,7 +10,7 @@
   }
   
   .product-container {
-    background: white;
+    background: #bebebe;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.1);
@@ -48,18 +48,18 @@
   .product-title {
     font-size: 28px;
     font-weight: bold;
-    color: #222;
+    color: #000000;
   }
   
   .stats p {
     margin: 0.25rem 0;
-    color: #444;
+    color: #000000;
   }
   
   .product-description {
     font-size: 16px;
     line-height: 1.5;
-    color: #555;
+    color: #000000;
   }
   
   .price-box {
@@ -69,7 +69,7 @@
   .product-price {
     font-size: 24px;
     font-weight: bold;
-    color: #B12704;
+    color: #3b3b3b;
   }
   
   .installments {
@@ -91,6 +91,7 @@
     border-radius: 6px;
     padding: 5px 10px;
     width: fit-content;
+    background-color: white;
   }
   
   .btn {
@@ -121,20 +122,20 @@
   }
   
   .add-to-cart {
-    background: #FFA41C;
+    background: #00c3ff;
     color: white;
   }
   
   .add-to-cart:hover {
-    background: #FF8F00;
+    background: #000000 ;
   }
   
   .buy-now {
-    background: #FFD814;
-    color: #111;
+    background: #113464 ;
+    color: #ffffff;
   }
   
   .buy-now:hover {
-    background: #F7CA00;
+    background: #000000 ;
   }
   

@@ -27,7 +27,7 @@
         (change)="filterProducts()"
         class="brand-select"
       >
-        <option value="">All Prices</option>
+        <option value="">Todos os preços</option>
         <option value="0-150">0-150</option>
         <option value="150-300">150-300</option>
         <option value="300-450">300-450</option>
@@ -39,7 +39,7 @@
         (change)="filterProducts()"
         class="brand-select"
       >
-        <option value="">All Genders</option>
+        <option value="">Todos os gêneros</option>
         <option value="feminino">Feminino</option>
         <option value="masculino">Masculino</option>
         <option value="unissex">Unissex</option>
@@ -73,7 +73,7 @@
       <a [routerLink]="['/product', product.id]">
         <img [src]="product.imageUrl" [alt]="product.name" />
         <h3>{{ product.name }}</h3>
-        <p>{{ product.brand }}</p>
+        <p class="price">{{ product.brand }}</p>
         <p class="price">{{ product.price | number : "1.2-2" }}</p>
       </a>
     </div>

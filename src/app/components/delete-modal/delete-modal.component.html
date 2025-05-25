@@ -1,10 +1,11 @@
 <div class="modal-overlay" *ngIf="isOpen">
     <div class="modal">
-      <h3>Confirmar exclusão</h3>
-      <p>Você tem certeza que quer deletar esse produto?</p>
+      <h3>Atenção!!</h3>
+      <p>Você tem certeza que deseja deletar esse produto?</p>
+      <p>Essa ação não poderá ser desfeita.</p>
       <div class="button-group">
-        <button class="confirm-btn" (click)="confirm()">Sim</button>
-        <button class="cancel-btn" (click)="cancel()">Não</button>
+        <button class="cancel-btn" (click)="cancel()">Cancelar</button>
+        <button class="confirm-btn" (click)="confirm()">Excluir</button>
       </div>
     </div>
   </div>
