@@ -5,7 +5,7 @@
             type="text"
             [(ngModel)]="searchQuery"
             (input)="filterProducts()"
-            placeholder="Search products..."
+            placeholder="Pesquise o produto..."
             class="search-input"
           />
 
@@ -28,7 +28,7 @@
         </select>
 
         <select [(ngModel)]="selectedGender" (change)="filterProducts()" class="brand-select">
-          <option value="">All Genders</option>
+          <option value="">Todos os gêneros</option>
           <option value="feminino">Feminino</option>
           <option value="masculino">Masculino</option>
           <option value="unissex">Unissex</option>
@@ -40,7 +40,7 @@
             (change)="filterProducts()"
             class="brand-select"
           >
-            <option value="">All Brands</option>
+            <option value="">Todas as marcas</option>
             <option value="Nike">Nike</option>
             <option value="Adidas">Adidas</option>
             <option value="Puma">Puma</option>
@@ -48,7 +48,7 @@
         </div>
 
         <button *ngIf="isAdmin" class="add-btn" (click)="navigateToCreate()">
-          Add New
+          Criar produto
         </button>
       </div>
 
