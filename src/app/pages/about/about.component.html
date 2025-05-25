@@ -1,41 +1,59 @@
 <div class="about">
-    <h1>Sobre nós</h1>
-    <p>
-      Uma empresa dedicada a oferecer os melhores tênis do mercado, combinando design moderno, conforto e alta durabilidade.
-    </p>
-  
-    <h3>Nossa História</h3>
-    <p>
-      Em 2025, nasceu a shoeStore com um propósito claro: oferecer aos nossos clientes a melhor experiência possível no universo dos tênis.
-      Desde o início, adotamos uma abordagem focada na qualidade e sustentabilidade. Nossos produtos são desenvolvidos com materiais de alta
-      performance e tecnologias avançadas, sempre respeitando o meio ambiente e buscando minimizar nosso impacto ecológico.
-    </p>
-    <p>
-      Estamos comprometidos em oferecer um atendimento personalizado e acessível, garantindo que cada cliente encontre o tênis ideal para seu
-      estilo e necessidade.
-    </p>
-  
-    <div class="mission">
-      <h2>Missão</h2>
-      <p>Oferecer aos nossos clientes a melhor seleção de calçados, aliando estilo, conforto e qualidade a preços competitivos.</p>
-    </div>
-  
-    <div class="vision">
-      <h2>Visão</h2>
+  <h1>Sobre nós</h1>
+
+  <!-- SOBRE -->
+  <div class="accordion-item" [class.open]="sections.sobre">
+    <button class="accordion-header" (click)="toggleSection('sobre')">Sobre nós</button>
+    <div class="accordion-body" *ngIf="sections.sobre">
       <p>
-        Uma mentalidade focada no coletivo, impulsionada por uma cultura de inovação e um propósito unificado, dedicada a criar um impacto
-        positivo e duradouro.
+        Uma empresa dedicada a oferecer os melhores tênis do mercado, combinando design moderno, conforto e alta durabilidade. Nosso compromisso é entregar produtos que não apenas acompanham as tendências, mas que também proporcionam qualidade e resistência para o dia a dia dos nossos clientes.
       </p>
     </div>
-  
-    <div class="values">
-      <h2>Nossos valores</h2>
+  </div>
+
+  <!-- HISTÓRIA -->
+  <div class="accordion-item" [class.open]="sections.historia">
+    <button class="accordion-header" (click)="toggleSection('historia')">Nossa História</button>
+    <div class="accordion-body" *ngIf="sections.historia">
+      <p>
+        Fundada em 2025, a shoeStore nasceu do desejo de revolucionar o universo dos calçados esportivos e casuais. Desde o início, nosso foco foi oferecer uma experiência única ao cliente, combinando inovação, tecnologia e sustentabilidade.
+      </p>
+      <p>
+        Investimos constantemente em materiais de alta performance e processos que respeitam o meio ambiente, garantindo que cada tênis produzido seja um reflexo do nosso compromisso com a qualidade e a responsabilidade social.
+      </p>
+    </div>
+  </div>
+
+  <!-- MISSÃO -->
+  <div class="accordion-item" [class.open]="sections.missao">
+    <button class="accordion-header" (click)="toggleSection('missao')">Missão</button>
+    <div class="accordion-body" *ngIf="sections.missao">
+      <p>
+        Nossa missão é clara: proporcionar aos nossos clientes uma seleção exclusiva de calçados que alia estilo, conforto e durabilidade, tudo isso com preços competitivos. Queremos que cada pessoa encontre o par perfeito que acompanhe seu estilo de vida, seja para a prática esportiva ou para o uso cotidiano.
+      </p>
+    </div>
+  </div>
+
+  <!-- VISÃO -->
+  <div class="accordion-item" [class.open]="sections.visao">
+    <button class="accordion-header" (click)="toggleSection('visao')">Visão</button>
+    <div class="accordion-body" *ngIf="sections.visao">
+      <p>
+        Buscamos ser reconhecidos como uma marca que valoriza o coletivo, a inovação e a sustentabilidade. Nosso objetivo é construir uma cultura corporativa sólida, pautada por um propósito unificado, que gere impactos positivos e duradouros tanto para a sociedade quanto para o meio ambiente.
+      </p>
+    </div>
+  </div>
+
+  <!-- VALORES -->
+  <div class="accordion-item" [class.open]="sections.valores">
+    <button class="accordion-header" (click)="toggleSection('valores')">Nossos valores</button>
+    <div class="accordion-body" *ngIf="sections.valores">
       <ul>
-        <li>Qualidade em primeiro lugar</li>
-        <li>Inovação</li>
-        <li>Sustentabilidade</li>
-        <li>Confiabilidade</li>
+        <li><strong>Qualidade em primeiro lugar:</strong> Cada produto é desenvolvido com rigorosos padrões de qualidade para garantir a satisfação dos nossos clientes.</li>
+        <li><strong>Inovação:</strong> Estamos sempre à frente, adotando tecnologias e designs que elevam a experiência do usuário.</li>
+        <li><strong>Sustentabilidade:</strong> Comprometidos em reduzir nosso impacto ambiental, buscamos práticas sustentáveis em todas as etapas da produção.</li>
+        <li><strong>Confiabilidade:</strong> Construímos relacionamentos duradouros baseados na transparência, ética e respeito aos nossos clientes e colaboradores.</li>
       </ul>
     </div>
   </div>
-  
+</div>
