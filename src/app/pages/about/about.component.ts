@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.css'],
   imports: []
 })
-export class AboutComponent {}
+export class AboutComponent {
+  imagemLogo: string = 'assets/img/logo.png';
+}
