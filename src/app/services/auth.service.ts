@@ -16,35 +16,54 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string): boolean {
-    if (username === 'admin' && password === 'admin') {
-      const adminUser: User = { username, email: '', cpf: '', birthDate: '', password, isAdmin: true };
+
+  login(identifier: string, password: string): boolean {
+    if (identifier === 'admin' && password === 'admin') {
+      const adminUser: User = { 
+        username: 'admin', 
+        email: 'admin@admin.com', 
+        cpf: '00000000000', 
+        birthDate: '', 
+        password: 'admin', 
+        isAdmin: true 
+      };
       localStorage.setItem('currentUser', JSON.stringify(adminUser));
       this.currentUserSubject.next(adminUser);
       return true;
     }
-    
+
     const users = this.getUsers();
-    const user = users.find(u => u.username === username && u.password === password);
-    
+    const user = users.find(u =>
+      (u.email === identifier || u.cpf === identifier || u.username === identifier) &&
+      u.password === password
+    );
+
     if (user) {
-      console.log('teste');
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.currentUserSubject.next(user);
       return true;
     }
-    
+
     return false;
   }
 
-  register(username: string, email: string, cpf: string, birthDate: string, password: string, confirmPassword?: string): boolean {
+
+  register(username: string, email: string, cpf: string, birthDate: string, password: string): boolean {
     const users = this.getUsers();
+
     if (users.some(u => u.username === username || u.email === email || u.cpf === cpf)) {
       return false;
     }
-    
 
-    const newUser: User = { username, email, cpf, birthDate, password, isAdmin: false };
+    const newUser: User = { 
+      username, 
+      email, 
+      cpf, 
+      birthDate, 
+      password, 
+      isAdmin: false 
+    };
+
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     return true;
@@ -61,6 +80,6 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-  return this.currentUserSubject.value !== null;
-}
+    return this.currentUserSubject.value !== null;
+  }
 }
