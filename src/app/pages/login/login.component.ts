@@ -6,13 +6,13 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
+  templateUrl: './login.component.html',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username = '';
+  identifier = ''; 
   password = '';
   error = '';
 
@@ -22,10 +22,10 @@ export class LoginComponent {
   ) {}
 
   onSubmit() {
-    if (this.authService.login(this.username, this.password)) {
+    if (this.authService.login(this.identifier, this.password)) {
       this.router.navigate(['/']);
     } else {
-      this.error = 'Usuário ou senha incorretos.';
+      this.error = 'Usuário, email, CPF ou senha inválidos';
     }
   }
 }

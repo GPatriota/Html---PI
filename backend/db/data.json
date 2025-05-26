@@ -17,25 +17,12 @@
       "size": [
         41
       ],
-      "name": "Ultraboost",
+      "name": "Ultraboosts",
       "price": 12,
       "brand": "Adidas",
       "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
       "description": "Premium running shoe with boost technology",
       "gender": "masculino"
-    },
-    {
-      "id": "1747883627560",
-      "size": [
-        41,
-        42
-      ],
-      "name": "Gustavo Patriota",
-      "price": 22,
-      "brand": "Teste",
-      "imageUrl": "https://imgnike-a.akamaihd.net/360x360/02702751A10.jpg",
-      "description": "Teste",
-      "gender": "unissex"
     }
   ]
 }
