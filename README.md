@@ -42,10 +42,12 @@ npm start
 ### Tecnologias Utilizadas
 
 [![Angular][Angular.io]][Angular-url]
-[![HTML5][HTML5-badge]][HTML5-url]
-[![CSS3][CSS3-badge]][CSS3-url]
 [![TypeScript][TypeScript-badge]][TypeScript-url]
 [![JSON][JSON-badge]][JSON-url]
+[![HTML5][HTML5-badge]][HTML5-url]
+[![CSS3][CSS3-badge]][CSS3-url]
+[![json-server][JsonServer-badge]][JsonServer-url]
+[![localStorage][LocalStorage-badge]][LocalStorage-url]
 
 ## 🤝 Colaboradores
 
@@ -136,3 +138,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 [TypeScript-url]: https://www.typescriptlang.org/
 [JSON-badge]: https://img.shields.io/badge/JSON-FFD500?style=for-the-badge&logo=json&logoColor=black
 [JSON-url]: https://www.json.org/json-en.html
+[LocalStorage-badge]: https://img.shields.io/badge/localStorage-yellow?style=for-the-badge
+[LocalStorage-url]: https://developer.mozilla.org/pt-BR/docs/Web/API/Window/localStorage
+[JsonServer-badge]: https://img.shields.io/badge/json--server-333?style=for-the-badge&logo=json&logoColor=white
+[JsonServer-url]: https://github.com/typicode/json-server
