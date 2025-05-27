@@ -62,9 +62,13 @@
         name="newBrand"
         required
         #newBrandInput="ngModel"
-        [ngClass]="{'error': newBrandInput.invalid && (newBrandInput.touched || isSubmitted)}"
+        [ngClass]="{'error': newBrandInput.invalid && (newBrandInput.touched || isSubmitted || brandErrorMessage)}"
+        (input)="validateNewBrand()"
       />
-      <div *ngIf="newBrandInput.invalid && (newBrandInput.touched || isSubmitted)" class="error-message">
+      <div *ngIf="brandErrorMessage" class="error-message">
+        {{ brandErrorMessage }}
+      </div>
+      <div *ngIf="!brandErrorMessage && newBrandInput.invalid && (newBrandInput.touched || isSubmitted)" class="error-message">
         Nome da nova marca é obrigatório.
       </div>
     </div>

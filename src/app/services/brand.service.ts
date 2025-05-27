@@ -19,21 +19,31 @@ export class BrandService {
     return this.availableBrandsSubject.value;
   }
 
-  addBrand(brandName: string): void {
-    if (!brandName || brandName.trim() === '') return;
+  public brandExists(brandName: string): boolean {
+    if (!brandName || brandName.trim() === '') return false;
 
-    const normalizedBrandName = brandName.trim();
+    const normalizedBrandName = brandName.trim().toLowerCase();
     const currentBrands = this.availableBrandsSubject.value;
 
-    const brandExists = currentBrands.some(brand => 
-      brand.toLowerCase() === normalizedBrandName.toLowerCase()
+    return currentBrands.some(brand => 
+      brand.toLowerCase() === normalizedBrandName
     );
+  }
+
+  addBrand(brandName: string): { success: boolean; message?: string } {
     
-    if (!brandExists) {
-      const updatedBrands = [...currentBrands, normalizedBrandName];
-      this.availableBrandsSubject.next(updatedBrands);
-      this.saveBrands(updatedBrands);
+    const normalizedBrandName = brandName.trim();
+    
+    if (this.brandExists(normalizedBrandName)) {
+      return { success: false, message: 'Essa marca já existe, selecione-a na lista de Marcas.' };
     }
+    
+    const currentBrands = this.availableBrandsSubject.value;
+    const updatedBrands = [...currentBrands, normalizedBrandName];
+    this.availableBrandsSubject.next(updatedBrands);
+    this.saveBrands(updatedBrands);
+    
+    return { success: true };
   }
 
   private saveBrands(brands: string[]): void {
