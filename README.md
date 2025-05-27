@@ -53,78 +53,63 @@ npm start
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-<table>
+## 🤝 Colaboradores
+
+<table align="center">
   <tr>
     <td align="center">
-      <a href="#" title="Perfil - Gustavo Patriota Silva">
-        <img src="https://avatars.githubusercontent.com/u/155376842?s=96&v=4" width="100px;" alt="Foto do Gustavo Patriota Silva no GitHub"/><br>
-        <sub>
-          <b>Gustavo Patriota Silva</b>
-        </sub>
+      <a href="#" title="Gustavo Patriota Silva">
+        <img src="https://avatars.githubusercontent.com/u/155376842?s=96&v=4" width="120px" alt="Gustavo Patriota Silva"/><br />
+        <sub><b>Gustavo Patriota Silva</b></sub>
       </a>
     </td>
     <td align="center">
-      <a href="#" title="Perfil - Lucas Freitas Bezerra">
-        <img src="https://avatars.githubusercontent.com/u/180765047?v=4" width="100px;" alt="Foto do Lucas Freitas Bezerra no GitHub"/><br>
-        <sub>
-          <b>Lucas Freitas Bezerra</b>
-        </sub>
+      <a href="#" title="Lucas Freitas Bezerra">
+        <img src="https://avatars.githubusercontent.com/u/180765047?v=4" width="120px" alt="Lucas Freitas Bezerra"/><br />
+        <sub><b>Lucas Freitas Bezerra</b></sub>
       </a>
     </td>
     <td align="center">
-      <a href="#" title="Perfil - Gabriel Lins Rosa">
-        <img src="https://avatars.githubusercontent.com/u/179602341?v=4" width="100px;" alt="Foto do Gabriel Lins Rosa no GitHub"/><br>
-        <sub>
-          <b>Gabriel Lins Rosa</b>
-        </sub>
+      <a href="#" title="Gabriel Lins Rosa">
+        <img src="https://avatars.githubusercontent.com/u/179602341?v=4" width="120px" alt="Gabriel Lins Rosa"/><br />
+        <sub><b>Gabriel Lins Rosa</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#" title="Ronaldo Mota da Silva Junior">
+        <img src="https://avatars.githubusercontent.com/u/86910362?v=4" width="120px" alt="Ronaldo Mota da Silva Junior"/><br />
+        <sub><b>Ronaldo Mota da Silva Junior</b></sub>
       </a>
     </td>
   </tr>
   <tr>
-  <td align="center">
-      <a href="#" title="Perfil - Ronaldo Mota da Silva Junior">
-        <img src="https://avatars.githubusercontent.com/u/86910362?v=4" width="100px;" alt="Foto do Ronaldo Mota da Silva Junior no GitHub"/><br>
-        <sub>
-          <b>Ronaldo Mota da Silva Junior</b>
-        </sub>
+    <td align="center">
+      <a href="#" title="Weliclene Inacio Pedroza">
+        <img src="https://avatars.githubusercontent.com/u/146399973?v=4" width="120px" alt="Weliclene Inacio Pedroza"/><br />
+        <sub><b>Weliclene Inacio Pedroza</b></sub>
       </a>
     </td>
-  <td align="center">
-      <a href="#" title="Perfil - Weliclene Inacio Pedroza">
-        <img src="https://avatars.githubusercontent.com/u/146399973?v=4" width="100px;" alt="Foto do Weliclene Inacio Pedroza no GitHub"/><br>
-        <sub>
-          <b>Weliclene Inacio Pedroza</b>
-        </sub>
+    <td align="center">
+      <a href="#" title="João Victor de Oliveira Godoy Lima">
+        <img src="https://avatars.githubusercontent.com/u/199648153?v=4" width="120px" alt="João Victor de Oliveira Godoy Lima"/><br />
+        <sub><b>João Victor de Oliveira Godoy Lima</b></sub>
       </a>
     </td>
-  <td align="center">
-      <a href="#" title="Perfil - João Victor de Oliveira Godoy Lima">
-        <img src="https://avatars.githubusercontent.com/u/199648153?v=4" width="100px;" alt="Foto do João Victor de Oliveira Godoy Lima no GitHub"/><br>
-        <sub>
-          <b>João Victor de Oliveira Godoy Lima</b>
-        </sub>
+    <td align="center">
+      <a href="#" title="Maria Eduarda">
+        <img src="https://avatars.githubusercontent.com/u/152117065?v=4" width="120px" alt="Maria Eduarda"/><br />
+        <sub><b>Maria Eduarda Maklouf</b></sub>
       </a>
     </td>
-  </tr>
-<tr>
-  <td align="center">
-      <a href="#" title="Perfil - Maria Eduarda">
-        <img src="https://avatars.githubusercontent.com/u/152117065?v=4" width="100px;" alt="Foto da Maria Eduarda no GitHub"/><br>
-        <sub>
-          <b>Maria Eduarda</b>
-        </sub>
-      </a>
-    </td>
-  <td align="center">
-      <a href="#" title="Perfil - Vinicius de Paula Silva">
-        <img src="https://avatars.githubusercontent.com/u/188932773?v=4" width="100px;" alt="Foto do Vinicius de Paula Silva no GitHub"/><br>
-        <sub>
-          <b>Vinicius de Paula Silva</b>
-        </sub>
+    <td align="center">
+      <a href="#" title="Vinicius de Paula Silva">
+        <img src="https://avatars.githubusercontent.com/u/188932773?v=4" width="120px" alt="Vinicius de Paula Silva"/><br />
+        <sub><b>Vinicius de Paula Silva</b></sub>
       </a>
     </td>
   </tr>
 </table>
+
 
 
 <!-- LINKS & IMAGENS -->
