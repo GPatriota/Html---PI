@@ -74,6 +74,19 @@
     </div>
 
     <div class="form-group">
+                <label>Tamanhos Disponíveis</label>
+                <div class="size-options">
+                  <label *ngFor="let size of disponibleSizes">
+                    <input type="checkbox" [value]="size" (change)="toggleSize(size)" [checked]="product.size.includes(size)" />
+                    {{ size }}
+                  </label>
+                </div>
+                <div *ngIf="isSubmitted && product.size.length === 0" class="error-message">
+                  Selecione pelo menos um tamanho.
+                </div>
+              </div>
+
+    <div class="form-group">
       <label for="description">Descrição</label>
       <textarea
         id="description"

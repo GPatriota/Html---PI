@@ -14,7 +14,7 @@
         (change)="filterProducts()"
         class="brand-select"
       >
-        <option [ngValue]="null">Todos os tamanhos</option>
+        <option [ngValue]="null">Todos os tamanhos disponíveis</option>
         <option *ngFor="let size of availableSizes" [ngValue]="size">
           {{ size }}
         </option>

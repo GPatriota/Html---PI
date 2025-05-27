@@ -29,6 +29,16 @@ export class EditProductComponent implements OnInit {
     private brandService: BrandService
   ) {}
 
+  toggleSize(size: number) {
+    if (!this.product) return; 
+
+    if (this.product.size.includes(size)) {
+      this.product.size = this.product.size.filter(s => s !== size);
+    } else {
+      this.product.size.push(size);
+    }
+  }
+
   ngOnInit() {
     this.brandService.availableBrands$.subscribe((brands) => {
       this.availableBrands = brands;
