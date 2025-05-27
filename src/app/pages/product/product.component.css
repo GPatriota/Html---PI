@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   padding: 2rem;
-
 }
 
 .product-container {
@@ -139,7 +138,6 @@
 .buy-now:hover {
   background: #000000;
 }
-
 
 .size-section {
   margin-bottom: 15px;

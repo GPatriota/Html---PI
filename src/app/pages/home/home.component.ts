@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
   currentSlide = 0;
@@ -38,6 +38,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToProducts(brand: string) {
-    this.router.navigate(['/products'], { queryParams: { brand } });
+    this.router.navigate(["/products"], { queryParams: { brand } });
   }
 }

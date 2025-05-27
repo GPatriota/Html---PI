@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms"; 
+import { FormsModule } from "@angular/forms";
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../models/product.model";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -9,15 +9,15 @@ import { AuthService } from "../../services/auth.service";
 @Component({
   selector: "app-product",
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.css"],
 })
 export class ProductComponent implements OnInit {
   product: Product = {
-    id: '',
-    size: [], 
-    name: '',
+    id: "",
+    size: [],
+    name: "",
     price: 0,
     brand: "",
     imageUrl: "",
@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit {
     description: "",
   };
   quantity = 1;
-  selectedSize: number | string | undefined; 
+  selectedSize: number | string | undefined;
 
   constructor(
     private productService: ProductService,
@@ -54,7 +54,7 @@ export class ProductComponent implements OnInit {
             this.product = product;
 
             if (product.size && product.size.length > 0) {
-              this.selectedSize = product.size[0]; 
+              this.selectedSize = product.size[0];
             }
             return;
           }
@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
 
   goToInDeveloping() {
     if (this.authService.isLogged()) {
-      console.log('Tamanho selecionado:', this.selectedSize);
+      console.log("Tamanho selecionado:", this.selectedSize);
       this.router.navigate(["/in-developing"]);
     } else {
       alert("Você precisa estar logado para acessar essa página.");

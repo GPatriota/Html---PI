@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-about',
+  selector: "app-about",
   standalone: true,
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css'],
-  imports: []
+  templateUrl: "./about.component.html",
+  styleUrls: ["./about.component.css"],
+  imports: [],
 })
 export class AboutComponent {
-  imagemLogo: string = 'assets/img/logo.png';
+  imagemLogo: string = "assets/img/logo.png";
 }

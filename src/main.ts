@@ -1,8 +1,7 @@
 import { bootstrapApplication } from "@angular/platform-browser";
-import { provideRouter, RouterOutlet } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 import { Component } from "@angular/core";
 import { HeaderComponent } from "./app/components/header/header.component";
-import { routes } from "./app/app.routes";
 import { FooterComponent } from "./app/components/footer/footer.component";
 import { appConfig } from "./app/app.config";
 
@@ -20,5 +19,4 @@ import { appConfig } from "./app/app.config";
 })
 export class App {}
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, appConfig).catch((err) => console.error(err));

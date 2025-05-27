@@ -15,7 +15,12 @@
         </div>
       </div>
 
-      <a *ngIf="authService.currentUser$ | async" (click)="logout()" style="cursor: pointer;">Logout</a>
+      <a
+        *ngIf="authService.currentUser$ | async"
+        (click)="logout()"
+        style="cursor: pointer"
+        >Logout</a
+      >
     </div>
   </nav>
 </header>

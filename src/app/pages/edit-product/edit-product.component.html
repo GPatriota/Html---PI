@@ -1,6 +1,11 @@
 <div class="edit-product-container">
   <h2>Editando Produto</h2>
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="product-form" *ngIf="product">
+  <form
+    (ngSubmit)="onSubmit(form)"
+    #form="ngForm"
+    class="product-form"
+    *ngIf="product"
+  >
     <div class="form-group">
       <label for="name">Nome</label>
       <input
@@ -35,9 +40,19 @@
 
     <div class="form-group">
       <label for="brand">Marca</label>
-      <select id="brand" [(ngModel)]="product.brand" name="brand" required #brand="ngModel" (ngModelChange)="onBrandChange($event)" [class.invalid]="brand.touched && brand.invalid">
+      <select
+        id="brand"
+        [(ngModel)]="product.brand"
+        name="brand"
+        required
+        #brand="ngModel"
+        (ngModelChange)="onBrandChange($event)"
+        [class.invalid]="brand.touched && brand.invalid"
+      >
         <option value="">Selecione uma marca</option>
-        <option *ngFor="let brand of availableBrands" [value]="brand">{{ brand }}</option>
+        <option *ngFor="let brand of availableBrands" [value]="brand">
+          {{ brand }}
+        </option>
         <option value="Nova">Adicionar nova marca</option>
       </select>
       <div *ngIf="brand.touched && brand.invalid" class="error-message">
@@ -54,29 +69,48 @@
         name="newBrand"
         required
         #newBrandInput="ngModel"
-        [ngClass]="{'error': (newBrandInput.invalid && (newBrandInput.touched || isSubmitted)) || brandErrorMessage}"
+        [ngClass]="{
+          error:
+            (newBrandInput.invalid && (newBrandInput.touched || isSubmitted)) ||
+            brandErrorMessage
+        }"
         (input)="validateNewBrand()"
       />
       <div *ngIf="brandErrorMessage" class="error-message">
         {{ brandErrorMessage }}
       </div>
-      <div *ngIf="!brandErrorMessage && newBrandInput.invalid && (newBrandInput.touched || isSubmitted)" class="error-message">
+      <div
+        *ngIf="
+          !brandErrorMessage &&
+          newBrandInput.invalid &&
+          (newBrandInput.touched || isSubmitted)
+        "
+        class="error-message"
+      >
         Nome da nova marca é obrigatório.
       </div>
     </div>
 
     <div class="form-group">
-                <label>Tamanhos Disponíveis</label>
-                <div class="size-options">
-                  <label *ngFor="let size of disponibleSizes">
-                    <input type="checkbox" [value]="size" (change)="toggleSize(size)" [checked]="product.size.includes(size)" />
-                    {{ size }}
-                  </label>
-                </div>
-                <div *ngIf="isSubmitted && product.size.length === 0" class="error-message">
-                  Selecione pelo menos um tamanho.
-                </div>
-              </div>
+      <label>Tamanhos Disponíveis</label>
+      <div class="size-options">
+        <label *ngFor="let size of disponibleSizes">
+          <input
+            type="checkbox"
+            [value]="size"
+            (change)="toggleSize(size)"
+            [checked]="product.size.includes(size)"
+          />
+          {{ size }}
+        </label>
+      </div>
+      <div
+        *ngIf="isSubmitted && product.size.length === 0"
+        class="error-message"
+      >
+        Selecione pelo menos um tamanho.
+      </div>
+    </div>
 
     <div class="form-group">
       <label for="description">Descrição</label>
@@ -125,8 +159,12 @@
     </div>
 
     <div class="button-group">
-      <button type="button" class="cancel-btn" (click)="cancel()">Cancelar</button>
-      <button type="submit" class="submit-btn" [disabled]="form.invalid">Salvar alterações</button>
+      <button type="button" class="cancel-btn" (click)="cancel()">
+        Cancelar
+      </button>
+      <button type="submit" class="submit-btn" [disabled]="form.invalid">
+        Salvar alterações
+      </button>
     </div>
   </form>
 </div>

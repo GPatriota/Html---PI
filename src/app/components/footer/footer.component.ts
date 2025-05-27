@@ -7,7 +7,7 @@ import { RouterLink } from "@angular/router";
   templateUrl: "./footer.component.html",
   styleUrls: ["./footer.component.css"],
   standalone: true,
-  imports: [RouterLink, CommonModule]
+  imports: [RouterLink, CommonModule],
 })
 export class FooterComponent {
   bottomText: string = "Seu texto de rodapé aqui";

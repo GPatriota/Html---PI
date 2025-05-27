@@ -30,10 +30,10 @@ export class EditProductComponent implements OnInit {
   ) {}
 
   toggleSize(size: number) {
-    if (!this.product) return; 
+    if (!this.product) return;
 
     if (this.product.size.includes(size)) {
-      this.product.size = this.product.size.filter(s => s !== size);
+      this.product.size = this.product.size.filter((s) => s !== size);
     } else {
       this.product.size.push(size);
     }
@@ -60,17 +60,21 @@ export class EditProductComponent implements OnInit {
       if (this.product) {
         this.product.brand = "";
       }
-      this.brandErrorMessage = "";      
+      this.brandErrorMessage = "";
     } else {
       this.showNewBrandInput = false;
       this.newBrand = "";
-      this.brandErrorMessage = "";      
+      this.brandErrorMessage = "";
     }
   }
 
   validateNewBrand(): void {
-    if (this.newBrand.trim() && this.brandService.brandExists(this.newBrand.trim())) {
-      this.brandErrorMessage = "Essa marca já existe, selecione-a na lista de Marcas.";
+    if (
+      this.newBrand.trim() &&
+      this.brandService.brandExists(this.newBrand.trim())
+    ) {
+      this.brandErrorMessage =
+        "Essa marca já existe, selecione-a na lista de Marcas.";
     } else {
       this.brandErrorMessage = "";
     }
@@ -81,7 +85,7 @@ export class EditProductComponent implements OnInit {
       const result = this.brandService.addBrand(this.newBrand.trim());
       if (!result.success) {
         this.brandErrorMessage = result.message || "";
-        return; 
+        return;
       }
       this.product.brand = this.newBrand.trim();
     }

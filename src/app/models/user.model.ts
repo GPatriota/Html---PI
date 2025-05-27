@@ -4,6 +4,6 @@ export interface User {
   cpf: string;
   birthDate: string;
   password: string;
-  confirmPassword?: string;  
+  confirmPassword?: string;
   isAdmin: boolean;
 }

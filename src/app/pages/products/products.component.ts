@@ -6,17 +6,17 @@ import { ProductService } from "../../services/product.service";
 import { AuthService } from "../../services/auth.service";
 import { Product } from "../../models/product.model";
 import { DeleteModalComponent } from "../../components/delete-modal/delete-modal.component";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 import { BrandService } from "../../services/brand.service";
 
 @Component({
   selector: "app-products",
   standalone: true,
-  imports: [CommonModule, FormsModule, DeleteModalComponent, RouterModule ],
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  imports: [CommonModule, FormsModule, DeleteModalComponent, RouterModule],
+  templateUrl: "./products.component.html",
+  styleUrls: ["./products.component.css"],
 })
-export class ProductsComponent implements OnInit { 
+export class ProductsComponent implements OnInit {
   searchQuery = "";
   selectedBrand = "";
   selectedGender = "";
@@ -26,9 +26,9 @@ export class ProductsComponent implements OnInit {
   isAdmin = false;
   showDeleteModal = false;
   productToDelete: string | null = null;
-  allProducts: Product[] = []; 
+  allProducts: Product[] = [];
   availableBrands: string[] = [];
-  availableSizes: number[] = []; 
+  availableSizes: number[] = [];
 
   constructor(
     private productService: ProductService,
@@ -37,52 +37,55 @@ export class ProductsComponent implements OnInit {
     private route: ActivatedRoute,
     private brandService: BrandService
   ) {
-    
     this.authService.currentUser$.subscribe((user) => {
       this.isAdmin = user?.isAdmin || false;
     });
   }
 
-  ngOnInit() { 
-    this.productService.getProducts().subscribe(productsFromService => {
-      this.allProducts = productsFromService; 
+  ngOnInit() {
+    this.productService.getProducts().subscribe((productsFromService) => {
+      this.allProducts = productsFromService;
       this.extractAvailableSizes();
       this.filterProducts();
     });
 
-    this.brandService.availableBrands$.subscribe(brands => {
+    this.brandService.availableBrands$.subscribe((brands) => {
       this.availableBrands = brands;
     });
 
-    this.route.queryParams.subscribe(params => {
-      if (params['brand']) {
-        this.selectedBrand = params['brand'];
+    this.route.queryParams.subscribe((params) => {
+      if (params["brand"]) {
+        this.selectedBrand = params["brand"];
       }
     });
   }
 
   extractAvailableSizes() {
     const allSizesWithDuplicates: number[] = [];
-    
-    this.allProducts.forEach(product => {
+
+    this.allProducts.forEach((product) => {
       if (Array.isArray(product.size)) {
         allSizesWithDuplicates.push(...product.size);
-      } else if (typeof product.size === 'number') { 
+      } else if (typeof product.size === "number") {
         allSizesWithDuplicates.push(product.size);
       }
     });
 
-    this.availableSizes = [...new Set(allSizesWithDuplicates)].sort((a, b) => a - b);
+    this.availableSizes = [...new Set(allSizesWithDuplicates)].sort(
+      (a, b) => a - b
+    );
   }
 
   filterProducts() {
-    let productsToFilter = [...this.allProducts]; 
+    let productsToFilter = [...this.allProducts];
 
     if (this.searchQuery) {
       productsToFilter = productsToFilter.filter(
         (product) =>
           product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.brand
+            .toLowerCase()
+            .includes(this.searchQuery.toLowerCase()) ||
           product.gender.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
@@ -100,17 +103,20 @@ export class ProductsComponent implements OnInit {
     }
 
     if (this.selectedPrice) {
-      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number);
-      productsToFilter = productsToFilter.filter(product =>
-        product.price >= minPrice && product.price <= maxPrice
+      const [minPrice, maxPrice] = this.selectedPrice.split("-").map(Number);
+      productsToFilter = productsToFilter.filter(
+        (product) => product.price >= minPrice && product.price <= maxPrice
       );
     }
 
     if (this.selectedSize !== null) {
       const sizeFiltro = this.selectedSize;
-      productsToFilter = productsToFilter.filter(product => {
-
-        const sizes = Array.isArray(product.size) ? product.size : (typeof product.size === 'number' ? [product.size] : []);
+      productsToFilter = productsToFilter.filter((product) => {
+        const sizes = Array.isArray(product.size)
+          ? product.size
+          : typeof product.size === "number"
+          ? [product.size]
+          : [];
         return sizes.includes(sizeFiltro);
       });
     }
@@ -134,10 +140,9 @@ export class ProductsComponent implements OnInit {
   confirmDelete() {
     if (this.productToDelete) {
       this.productService.deleteProduct(this.productToDelete).subscribe(() => {
-
-        this.productService.getProducts().subscribe(productsFromService => {
+        this.productService.getProducts().subscribe((productsFromService) => {
           this.allProducts = productsFromService;
-          this.extractAvailableSizes(); 
+          this.extractAvailableSizes();
           this.filterProducts();
         });
       });

@@ -7,7 +7,7 @@
 
 .container {
   min-height: 130vh;
-  background: #656d80; 
+  background: #656d80;
   max-width: 100%;
   padding-bottom: 3rem;
 }
@@ -143,7 +143,7 @@
   font-size: 1.8rem;
   color: #f1f5f9;
   margin-bottom: 1.5rem;
-  padding-left: 1rem; 
+  padding-left: 1rem;
 }
 
 .brand-logos {
@@ -161,7 +161,7 @@
   background: #1e293b;
   border-radius: 8px;
   transition: all 0.3s ease;
-  
+
   border: 2px solid #9aa1ac;
   cursor: pointer;
 }
