@@ -16,7 +16,7 @@ import { BrandService } from "../../services/brand.service";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit { // Implementar OnInit
+export class ProductsComponent implements OnInit { 
   searchQuery = "";
   selectedBrand = "";
   selectedGender = "";
@@ -26,9 +26,9 @@ export class ProductsComponent implements OnInit { // Implementar OnInit
   isAdmin = false;
   showDeleteModal = false;
   productToDelete: string | null = null;
-  allProducts: Product[] = []; // Renomeado de 'products' para 'allProducts' para clareza
+  allProducts: Product[] = []; 
   availableBrands: string[] = [];
-  availableSizes: number[] = []; // Nova propriedade para os tamanhos
+  availableSizes: number[] = []; 
 
   constructor(
     private productService: ProductService,
@@ -37,17 +37,17 @@ export class ProductsComponent implements OnInit { // Implementar OnInit
     private route: ActivatedRoute,
     private brandService: BrandService
   ) {
-    // A chamada inicial de filterProducts será movida para ngOnInit
+    
     this.authService.currentUser$.subscribe((user) => {
       this.isAdmin = user?.isAdmin || false;
     });
   }
 
-  ngOnInit() { // ngOnInit é um bom lugar para buscar dados iniciais
+  ngOnInit() { 
     this.productService.getProducts().subscribe(productsFromService => {
-      this.allProducts = productsFromService; // Armazena todos os produtos
-      this.extractAvailableSizes(); // Extrai os tamanhos
-      this.filterProducts(); // Aplica filtros iniciais (se houver)
+      this.allProducts = productsFromService; 
+      this.extractAvailableSizes();
+      this.filterProducts();
     });
 
     this.brandService.availableBrands$.subscribe(brands => {
