@@ -31,7 +31,7 @@ export class CreateProductComponent {
   showNewBrandInput = false;
   newBrand = "";
   availableBrands: string[] = [];
-
+  brandErrorMessage = "";
   isSubmitted = false;
 
   constructor(
@@ -50,9 +50,19 @@ export class CreateProductComponent {
     if (value === "Nova") {
       this.showNewBrandInput = true;
       this.product.brand = "";
+      this.brandErrorMessage = "";
     } else {
       this.showNewBrandInput = false;
       this.newBrand = "";
+      this.brandErrorMessage = "";
+    }
+  }
+
+  validateNewBrand(): void {
+    if (this.newBrand.trim() && this.brandService.brandExists(this.newBrand.trim())) {
+      this.brandErrorMessage = "Essa marca já existe, selecione-a na lista de Marcas.";
+    } else {
+      this.brandErrorMessage = "";
     }
   }
 
@@ -69,9 +79,14 @@ export class CreateProductComponent {
     this.productForm.form.markAllAsTouched();
 
     if (this.showNewBrandInput && this.newBrand.trim()) {
-      this.brandService.addBrand(this.newBrand.trim());
+      const result = this.brandService.addBrand(this.newBrand.trim());
+      if (!result.success) {
+        this.brandErrorMessage = result.message || "";
+        return;
+      }
       this.product.brand = this.newBrand.trim();
     }
+
 
     if (this.productForm.valid) {
       this.product.id = Date.now().toString();

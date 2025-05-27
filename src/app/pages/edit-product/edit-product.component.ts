@@ -16,10 +16,10 @@ import { BrandService } from "../../services/brand.service";
 export class EditProductComponent implements OnInit {
   product: Product | null = null;
   disponibleSizes: number[] = [38, 39, 40, 41, 42];
-
   showNewBrandInput = false;
   newBrand = "";
   availableBrands: string[] = [];
+  brandErrorMessage = "";
   isSubmitted: any;
 
   constructor(
@@ -50,15 +50,29 @@ export class EditProductComponent implements OnInit {
       if (this.product) {
         this.product.brand = "";
       }
+      this.brandErrorMessage = "";      
     } else {
       this.showNewBrandInput = false;
       this.newBrand = "";
+      this.brandErrorMessage = "";      
+    }
+  }
+
+  validateNewBrand(): void {
+    if (this.newBrand.trim() && this.brandService.brandExists(this.newBrand.trim())) {
+      this.brandErrorMessage = "Essa marca já existe, selecione-a na lista de Marcas.";
+    } else {
+      this.brandErrorMessage = "";
     }
   }
 
   onSubmit(form: NgForm) {
     if (this.showNewBrandInput && this.newBrand.trim() && this.product) {
-      this.brandService.addBrand(this.newBrand.trim());
+      const result = this.brandService.addBrand(this.newBrand.trim());
+      if (!result.success) {
+        this.brandErrorMessage = result.message || "";
+        return; 
+      }
       this.product.brand = this.newBrand.trim();
     }
 
