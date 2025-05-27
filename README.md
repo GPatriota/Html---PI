@@ -53,8 +53,6 @@ npm start
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-## 🤝 Colaboradores
-
 <table align="center">
   <tr>
     <td align="center">
