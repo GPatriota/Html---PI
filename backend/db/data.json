@@ -3,9 +3,9 @@
     {
       "id": "1",
       "size": [
-        41
+        41, 32, 48, 23, 4
       ],
-      "name": "Air Max 270",
+      "name": "Air Max 270 genteee",
       "price": 199.99,
       "brand": "Nike",
       "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&h=300&q=80",

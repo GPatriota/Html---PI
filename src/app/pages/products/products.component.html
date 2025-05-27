@@ -15,11 +15,9 @@
         class="brand-select"
       >
         <option [ngValue]="null">Todos os tamanhos</option>
-        <option [ngValue]="38">38</option>
-        <option [ngValue]="39">39</option>
-        <option [ngValue]="40">40</option>
-        <option [ngValue]="41">41</option>
-        <option [ngValue]="42">42</option>
+        <option *ngFor="let size of availableSizes" [ngValue]="size">
+          {{ size }}
+        </option>
       </select>
 
       <select
