@@ -59,7 +59,7 @@ export class RegisterComponent {
     if (!this.dob) {
     this.error = 'A data de nascimento é obrigatória';
     return;
-    }
+  }
 
     if (this.password.length < 5){
       this.error = ('A senha deve conter pelo menos 5 caracteres')
