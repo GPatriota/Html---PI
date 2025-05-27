@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core"; // Adicionado OnInit
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterModule } from "@angular/router";
@@ -16,7 +16,7 @@ import { BrandService } from "../../services/brand.service";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit { 
   searchQuery = "";
   selectedBrand = "";
   selectedGender = "";
@@ -26,8 +26,9 @@ export class ProductsComponent {
   isAdmin = false;
   showDeleteModal = false;
   productToDelete: string | null = null;
-  products: Product[] = []
+  allProducts: Product[] = []; 
   availableBrands: string[] = [];
+  availableSizes: number[] = []; 
 
   constructor(
     private productService: ProductService,
@@ -36,18 +37,49 @@ export class ProductsComponent {
     private route: ActivatedRoute,
     private brandService: BrandService
   ) {
-    this.filterProducts();
+    
     this.authService.currentUser$.subscribe((user) => {
       this.isAdmin = user?.isAdmin || false;
     });
   }
 
+  ngOnInit() { 
+    this.productService.getProducts().subscribe(productsFromService => {
+      this.allProducts = productsFromService; 
+      this.extractAvailableSizes();
+      this.filterProducts();
+    });
+
+    this.brandService.availableBrands$.subscribe(brands => {
+      this.availableBrands = brands;
+    });
+
+    this.route.queryParams.subscribe(params => {
+      if (params['brand']) {
+        this.selectedBrand = params['brand'];
+      }
+    });
+  }
+
+  extractAvailableSizes() {
+    const allSizesWithDuplicates: number[] = [];
+    
+    this.allProducts.forEach(product => {
+      if (Array.isArray(product.size)) {
+        allSizesWithDuplicates.push(...product.size);
+      } else if (typeof product.size === 'number') { 
+        allSizesWithDuplicates.push(product.size);
+      }
+    });
+
+    this.availableSizes = [...new Set(allSizesWithDuplicates)].sort((a, b) => a - b);
+  }
+
   filterProducts() {
-    this.productService.getProducts().subscribe(products => {
-      this.products = products
+    let productsToFilter = [...this.allProducts]; 
 
     if (this.searchQuery) {
-      products = products.filter(
+      productsToFilter = productsToFilter.filter(
         (product) =>
           product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           product.brand.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
@@ -55,39 +87,37 @@ export class ProductsComponent {
       );
     }
 
-
-
     if (this.selectedBrand) {
-      products = products.filter(
+      productsToFilter = productsToFilter.filter(
         (product) => product.brand === this.selectedBrand
       );
     }
 
     if (this.selectedGender) {
-      products = products.filter(
+      productsToFilter = productsToFilter.filter(
         (product) => product.gender === this.selectedGender
       );
     }
 
     if (this.selectedPrice) {
-      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number); 
-  
-      products = products.filter(product => 
+      const [minPrice, maxPrice] = this.selectedPrice.split('-').map(Number);
+      productsToFilter = productsToFilter.filter(product =>
         product.price >= minPrice && product.price <= maxPrice
       );
     }
 
-   if (this.selectedSize !== null) {
-  const sizeFiltro = this.selectedSize;
-  products = products.filter(product => {
-    const sizes = Array.isArray(product.size) ? product.size : [product.size];
-    return sizes.includes(sizeFiltro);
-  });
-}
+    if (this.selectedSize !== null) {
+      const sizeFiltro = this.selectedSize;
+      productsToFilter = productsToFilter.filter(product => {
 
-    this.filteredProducts = products;
+        const sizes = Array.isArray(product.size) ? product.size : (typeof product.size === 'number' ? [product.size] : []);
+        return sizes.includes(sizeFiltro);
+      });
+    }
+
+    this.filteredProducts = productsToFilter;
   }
-)};
+
   navigateToCreate() {
     this.router.navigate(["/create-product"]);
   }
@@ -104,7 +134,12 @@ export class ProductsComponent {
   confirmDelete() {
     if (this.productToDelete) {
       this.productService.deleteProduct(this.productToDelete).subscribe(() => {
-        this.filterProducts();
+
+        this.productService.getProducts().subscribe(productsFromService => {
+          this.allProducts = productsFromService;
+          this.extractAvailableSizes(); 
+          this.filterProducts();
+        });
       });
     }
     this.showDeleteModal = false;
@@ -114,19 +149,5 @@ export class ProductsComponent {
   cancelDelete() {
     this.showDeleteModal = false;
     this.productToDelete = null;
-  }
-
-  ngOnInit() {
-
-    this.brandService.availableBrands$.subscribe(brands => {
-      this.availableBrands = brands;
-    });
-
-    this.route.queryParams.subscribe(params => {
-      if (params['brand']) {
-        this.selectedBrand = params['brand'];
-      }
-      this.filterProducts();
-    });
   }
 }
