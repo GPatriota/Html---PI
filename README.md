@@ -1,6 +1,6 @@
 # ShoeStore
 
-![shoestore](https://github.com/user-attachments/assets/2dd64a42-2a39-4479-9011-c17bb4b64b9a)
+![ShoeStore - Tela Inicial](src/assets/tela_inicial.png)
 
 > Este projeto é um e-commerce focado na venda de tênis, sapatos e calçados em geral, desenvolvido como parte do Projeto Integrador (PI) da faculdade.
 
