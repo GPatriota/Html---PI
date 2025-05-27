@@ -3,9 +3,10 @@
     {
       "id": "1",
       "size": [
-        41, 32, 48, 23, 4
+        42,
+        38
       ],
-      "name": "Air Max 270 genteee",
+      "name": "Air Max 270",
       "price": 199.99,
       "brand": "Nike",
       "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&h=300&q=80",
@@ -15,12 +16,13 @@
     {
       "id": "2",
       "size": [
-        41
+        41,
+        42
       ],
       "name": "Ultraboost",
-      "price": 12,
+      "price": 500,
       "brand": "Adidas",
-      "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
+      "imageUrl": "https://assets.adidas.com/images/w_600,f_auto,q_auto/2fc4b9245ec54cfba268836f29f1053b_9366/Tenis_Forum_Low_CL_Blanco_JI3268_01_00_standard.jpg",
       "description": "Premium running shoe with boost technology",
       "gender": "masculino"
     },
@@ -28,26 +30,14 @@
       "id": "3",
       "name": "RS-X",
       "size": [
-        41
+        40,
+        39
       ],
       "price": 129.99,
       "brand": "Puma",
       "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=300&h=300&q=80",
       "description": "Retro-inspired sneaker with modern comfort",
       "gender": "feminino"
-    },
-    {
-      "id": "1747883627560",
-      "size": [
-        41,
-        42
-      ],
-      "name": "Gustavo Patriota",
-      "price": 22,
-      "brand": "Puma",
-      "imageUrl": "https://imgnike-a.akamaihd.net/360x360/02702751A10.jpg",
-      "description": "Teste",
-      "gender": "unissex"
     }
   ]
 }

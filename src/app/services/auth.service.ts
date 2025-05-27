@@ -34,7 +34,7 @@ export class AuthService {
 
     const users = this.getUsers();
     const user = users.find(u =>
-      (u.email === identifier || u.cpf === identifier || u.username === identifier) 
+      (u.email === identifier || u.cpf === identifier || u.username === identifier) && u.password === password
     );
 
     if (user) {
